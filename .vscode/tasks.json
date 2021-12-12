@@ -10,6 +10,7 @@
                 "${file}",
                 "${fileDirname}/models/*.cpp",
                 "${fileDirname}/preprocessing/*.cpp",
+                "${fileDirname}/postprocessing/*.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

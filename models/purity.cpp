@@ -2,6 +2,7 @@
 #include "purity.h"
 #include <string>
 #include <vector>
+#include "../preprocessing/splitedStringResult.h"
 
 using namespace std;
 
@@ -18,29 +19,6 @@ void Purity::show()
 {
     cout << "output=" << outputId << "input=" << inputId;
 }
-
-struct SplitedStringResult
-{
-    std::string firstPart;
-    std::string rest;
-};
-
-SplitedStringResult splitWithFirstDeliminer(string input, string delimiter)
-{
-    SplitedStringResult result;
-    size_t pos = 0;
-    if ((pos = input.find(delimiter)) != string::npos)
-    {
-        result.firstPart = input.substr(0, pos);
-        result.rest = input.substr(pos+1, input.length());
-    }
-    else
-    {
-        result.firstPart = input;
-        result.rest = "";
-    }
-    return result;
-};
 
 DataEntity::DataEntity(string rowData)
 {
