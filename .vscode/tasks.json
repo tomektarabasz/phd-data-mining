@@ -11,6 +11,7 @@
                 "${fileDirname}/models/*.cpp",
                 "${fileDirname}/preprocessing/*.cpp",
                 "${fileDirname}/postprocessing/*.cpp",
+                "${fileDirname}/helpers/*.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
