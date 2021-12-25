@@ -8,8 +8,15 @@
 #include "../helpers/timeMeasure.h"
 #include "mdPointWithIndex.h"
 #include "../helpers/vectorLength.h"
+#include "../helpers/vectorSubrange.h"
 
 using namespace std;
+
+void sortVector(vector<MDPointWithIndex> &neighbour, MDPoint referencePoint)
+{
+    sort(neighbour.begin(), neighbour.end(), [&referencePoint](MDPointWithIndex &pointA, MDPointWithIndex &pointB)
+         { return pointA.point.distToPoint(referencePoint) < pointB.point.distToPoint(referencePoint); });
+};
 
 MDPoint::MDPoint(string rowData) : clasterId(-1), rnnk(0)
 {
@@ -41,7 +48,7 @@ MDPoint::MDPoint(){};
 
 double MDPoint::distToPoint(MDPoint &point2)
 {
-    double dist = tanimotoDist(this->attributes, point2.attributes);
+    double dist = tanimotoDist(*this, point2);
     return dist;
 }
 
@@ -116,17 +123,19 @@ void MDPoint::optimCalcNNk(int k, vector<MDPoint> &data)
             iterator++;
         }
     }
-
-    sort(neighbour.begin(), neighbour.end(), [this](MDPointWithIndex &pointA, MDPointWithIndex &pointB)
-         { return pointA.point.distToPoint(*this) < pointB.point.distToPoint(*this); });
+    sortVector(neighbour,*this);
 
     tempPoint = neighbour.back().point;
     TanimotoLengthRange rangeLength;
+    double tanimotoSimilarity = 1 - tempPoint.distToPoint(*this);
 
-    rangeLength = vectorLengthRange(this->lengthOfVector, 1 - tempPoint.distToPoint(*this));
+    rangeLength = vectorLengthRange(this->lengthOfVector, tanimotoSimilarity);
 
-    vector<MDPoint> potentialNeighbour;
+    neighbour = vectorSubrange(rangeLength, data);
 
-    copy_if(data.begin(), data.end(), back_inserter(potentialNeighbour), [&rangeLength](MDPoint i)
-            { return i.lengthOfVector >= rangeLength.minLength && i.lengthOfVector <= rangeLength.maxLength; });
+    // copy_if(data.begin(), data.end(), back_inserter(potentialNeighbour), [&rangeLength](MDPoint i)
+    //         { return i.lengthOfVector >= rangeLength.minLength && i.lengthOfVector <= rangeLength.maxLength; });
+
+    int tt = neighbour.size();
+    cout << tt;
 }

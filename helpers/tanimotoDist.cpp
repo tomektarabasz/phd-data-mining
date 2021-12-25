@@ -3,20 +3,21 @@
 #include <math.h>
 #include <numeric>
 #include "vectorLength.h"
+#include "../models/mdPoint.h"
 
-double tanimotoDist(vector<double> Point1, vector<double> Point2)
+double tanimotoDist(MDPoint Point1, MDPoint Point2)
 {
     double similarity;
-    size_t sizeOfPoint1 = Point1.size();
-    size_t sizeOfPoint2 = Point2.size();
+    size_t sizeOfPoint1 = Point1.attributes.size();
+    size_t sizeOfPoint2 = Point2.attributes.size();
     if (sizeOfPoint1 != sizeOfPoint2)
     {
         return -1.0;
         throw std::invalid_argument("Vectors are not the same size");
     }
-    double numerator = inner_product(Point1.begin(), Point1.end(), Point2.begin(), 0);
-    double point1Length = vectorLength(Point1);
-    double point2Length = vectorLength(Point2);
+    double numerator = inner_product(Point1.attributes.begin(), Point1.attributes.end(), Point2.attributes.begin(), 0.0);
+    double point1Length = pow(Point1.lengthOfVector, 2);
+    double point2Length = pow(Point2.lengthOfVector, 2);
     double denominator = point1Length + point2Length - numerator;
 
     similarity = numerator / denominator;
@@ -28,15 +29,15 @@ double tanimotoDist(vector<double> Point1, vector<double> Point2)
 
 double tanimotoAplhaCoefficient(double eps)
 {
-    double beta = 1 + 1 / eps;
-    return 1 / 2 * (beta + sqrt(pow(beta, 2) - 4));
+    double beta = 1.0 + 1.0 / eps;
+    return (beta + sqrt(pow(beta, 2.0) - 4.0)) / 2.0;
 }
 
 TanimotoLengthRange vectorLengthRange(double vectorLength, double tanimotoSimilarity)
 {
     double alpha = tanimotoAplhaCoefficient(tanimotoSimilarity);
     TanimotoLengthRange result;
-    result.minLength =vectorLength / alpha;
+    result.minLength = vectorLength / alpha;
     result.maxLength = alpha * vectorLength;
     return result;
 }
