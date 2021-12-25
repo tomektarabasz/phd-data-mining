@@ -123,14 +123,10 @@ void MDPoint::optimCalcNNk(int k, vector<MDPoint> &data)
     tempPoint = neighbour.back().point;
     TanimotoLengthRange rangeLength;
 
-    rangeLength =  vectorLengthRange(this->lengthOfVector,1-tempPoint.distToPoint(*this));
+    rangeLength = vectorLengthRange(this->lengthOfVector, 1 - tempPoint.distToPoint(*this));
 
-    for (auto point : neighbour)
-    {
-        this->nnk.push_back(point.point.guid);
-    }
-    for (auto point : neighbour)
-    {
-        data[point.index].rnnk += 1;
-    }
+    vector<MDPoint> potentialNeighbour;
+
+    copy_if(data.begin(), data.end(), back_inserter(potentialNeighbour), [&rangeLength](MDPoint i)
+            { return i.lengthOfVector >= rangeLength.minLength && i.lengthOfVector <= rangeLength.maxLength; });
 }

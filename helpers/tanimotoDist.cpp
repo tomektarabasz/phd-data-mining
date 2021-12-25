@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <math.h>
 #include <numeric>
+#include "vectorLength.h"
 
 double tanimotoDist(vector<double> Point1, vector<double> Point2)
 {
@@ -14,11 +15,9 @@ double tanimotoDist(vector<double> Point1, vector<double> Point2)
         throw std::invalid_argument("Vectors are not the same size");
     }
     double numerator = inner_product(Point1.begin(), Point1.end(), Point2.begin(), 0);
-    double point1Length = inner_product(Point1.begin(), Point1.end(), Point1.begin(), 0);
-    double point2Length = inner_product(Point2.begin(), Point2.end(), Point2.begin(), 0);
+    double point1Length = vectorLength(Point1);
+    double point2Length = vectorLength(Point2);
     double denominator = point1Length + point2Length - numerator;
-    double x;
-    double y;
 
     similarity = numerator / denominator;
     // WARNING
