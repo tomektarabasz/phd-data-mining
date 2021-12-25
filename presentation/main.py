@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 
-paths = {"dbscan":r'../Data/dbscanResult.csv',"test":r'../Data/test.csv',"lecture":r'../Data/lecture.csv'}
+paths = {"dbscan":r'./Data/dbscanResult.csv',"test":r'./Data/test.csv',"lecture":r'./Data/lecture.csv'}
 
 path = paths["lecture"]
 

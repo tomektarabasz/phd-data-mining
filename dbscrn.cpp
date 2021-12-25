@@ -4,6 +4,8 @@
 #include "preprocessing/mdPointLoader.h"
 #include "helpers/timeMeasure.h"
 #include "helpers/identyficator.h"
+#include "helpers/naiveReverseNearesNeighbour.h"
+#include "helpers/optimisedReverseNearesNeighbour.h"
 
 using namespace std;
 
@@ -25,9 +27,8 @@ int main(){
     //Start procedure
     TimeWriter timeWriter(pathToStoreTimeOfExecution, Identyficator("dbscrn",to_string(dataR.size())));
     timeWriter.start();
-
-    MDPoint point = dataR[0];
-    point.calcNNk(3,dataR);
+    // NaiveRNN(dataR);
+    OptimisedRNN(dataR);
 
     // This it end and time calculation
     timeWriter.stop();
