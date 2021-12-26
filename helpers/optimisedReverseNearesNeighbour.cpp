@@ -11,17 +11,18 @@ public:
     MDPointWithDist(MDPoint point, long index, double dist) : MDPointWithIndex(point, index), distToReferencePoint(dist){};
 };
 
-void OptimisedRNN(vector<MDPoint> &data)
+void OptimisedRNN(vector<MDPoint> &data, int k)
 {
     string pathToStoreTimeOfExecution = "Data/time.csv";
-    TimeWriter timeWriter(pathToStoreTimeOfExecution, "calcNNk , pure version");
+    TimeWriter timeWriter(pathToStoreTimeOfExecution, "calcNNk , optimVersion");
+    timeWriter.start();
 
     sort(data.begin(), data.end(), [](MDPoint &pointA, MDPoint &pointB)
          { return pointA.lengthOfVector < pointB.lengthOfVector; });
 
-    for (auto point : data)
+    for (auto& point : data)
     {
-        point.optimCalcNNk(4,data);
+        point.optimCalcNNk(k,data);
     }
 
     timeWriter.stop();

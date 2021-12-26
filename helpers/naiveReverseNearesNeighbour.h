@@ -8,6 +8,6 @@
 
 using namespace std;
 
-void NaiveRNN(vector<MDPoint> &data);
+void NaiveRNN(vector<MDPoint> &data, int k);
 
 #endif

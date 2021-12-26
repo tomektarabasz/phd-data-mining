@@ -5,20 +5,21 @@
 
 using namespace std;
 
-class MDPoint {
-    public:
+class MDPoint
+{
+public:
     string id;
     unsigned long guid;
     vector<double> attributes;
     long clasterId;
-    vector<unsigned long> nnk;
+    vector<string> nnk;
     // vector<unsigned long> rnnk;
     long rnnk;
     double lengthOfVector;
     MDPoint(string rowData);
     MDPoint();
-    double distToPoint(MDPoint& Point);
-    void calcNNk(int k, vector<MDPoint>& data);
-    void optimCalcNNk(int k, vector<MDPoint>& data);
+    double distToPoint(MDPoint &Point);
+    void calcNNk(int k, vector<MDPoint> &data);
+    void optimCalcNNk(int k, vector<MDPoint> &data);
 };
 #endif

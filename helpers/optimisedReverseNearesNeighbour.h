@@ -8,6 +8,6 @@
 
 using namespace std;
 
-void OptimisedRNN(vector<MDPoint> &data);
+void OptimisedRNN(vector<MDPoint> &data, int k);
 
 #endif

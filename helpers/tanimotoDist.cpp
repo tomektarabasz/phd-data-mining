@@ -27,17 +27,22 @@ double tanimotoDist(MDPoint Point1, MDPoint Point2)
     return 1 - similarity;
 };
 
-double tanimotoAplhaCoefficient(double eps)
+double tanimotoAplhaCoefficient(double eps, bool isMin)
 {
     double beta = 1.0 + 1.0 / eps;
+    if (isMin)
+    {
+        return (beta - sqrt(pow(beta, 2.0) - 4.0)) / 2.0;
+    }
     return (beta + sqrt(pow(beta, 2.0) - 4.0)) / 2.0;
 }
 
 TanimotoLengthRange vectorLengthRange(double vectorLength, double tanimotoSimilarity)
 {
-    double alpha = tanimotoAplhaCoefficient(tanimotoSimilarity);
+    double alphaMin = tanimotoAplhaCoefficient(tanimotoSimilarity, true);
+    double alphaMax = tanimotoAplhaCoefficient(tanimotoSimilarity, false);
     TanimotoLengthRange result;
-    result.minLength = vectorLength / alpha;
-    result.maxLength = alpha * vectorLength;
+    result.minLength = vectorLength * alphaMin;
+    result.maxLength = alphaMax * vectorLength;
     return result;
 }

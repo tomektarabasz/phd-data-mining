@@ -23,3 +23,29 @@ void DataWriter::write(string path, vector<Point> &data)
     else
         cout << "Unable to open file";
 };
+
+void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
+{
+    ofstream resultFile(pathToFile);
+    if (resultFile.is_open())
+    {
+        for (auto point : data)
+        {
+            resultFile << point.id << ",";
+            for (auto attr : point.attributes)
+            {
+                resultFile << attr << ",";
+            }
+            resultFile << "[";
+            for (auto nn : point.nnk)
+            {
+                resultFile << nn << ";";
+            }
+            resultFile << "],";
+            resultFile << point.rnnk << "\n";
+        }
+        resultFile.close();
+    }
+    else
+        cout << "Unable to open file";
+}
