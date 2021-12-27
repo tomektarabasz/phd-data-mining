@@ -9,5 +9,6 @@ double vectorLength(vector<double> attributes)
     {
         sum += pow(attr, 2);
     }
+    double tt = sqrt(sum);
     return sqrt(sum);
 }

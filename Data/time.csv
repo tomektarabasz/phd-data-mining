@@ -268,3 +268,152 @@
 26-12-2021 02:59:22,1.44267,calcNNk , pure version
 26-12-2021 03:02:36,0.437408,dataTimeLoading
 26-12-2021 03:02:40,1.43226,calcNNk , pure version
+26-12-2021 15:18:00,1.76601,dataTimeLoading
+26-12-2021 15:18:06,1.44911,calcNNk , pure version
+26-12-2021 16:35:08,4.58471e+06,calcNNk , optimVersion
+26-12-2021 16:35:08,4.62228e+06,dbscrn,12
+26-12-2021 16:36:20,0.441898,dataTimeLoading
+26-12-2021 16:36:20,1.66455,calcNNk , pure version
+26-12-2021 16:36:20,1.70554,calcNNk , optimVersion
+26-12-2021 16:36:20,3.82156,dbscrn,12
+26-12-2021 16:47:24,0.393194,dataTimeLoading
+26-12-2021 16:47:27,3.67492,calcNNk , pure version
+26-12-2021 16:47:56,28503.4,calcNNk , optimVersion
+26-12-2021 16:49:46,0.402367,dataTimeLoading
+26-12-2021 16:50:00,1.27803,calcNNk , pure version
+26-12-2021 16:50:36,0.455795,dataTimeLoading
+26-12-2021 16:51:04,1.27404,calcNNk , pure version
+26-12-2021 16:51:04,1.84409,calcNNk , optimVersion
+26-12-2021 16:54:06,0.455628,dataTimeLoading
+26-12-2021 16:54:07,1.26766,calcNNk , pure version
+26-12-2021 16:54:08,1.27129,calcNNk , optimVersion
+26-12-2021 16:55:22,74838.8,dbscrn,12
+26-12-2021 17:04:21,0.382116,dataTimeLoading
+26-12-2021 17:04:32,1.29775,calcNNk , pure version
+26-12-2021 17:04:34,3.79565,calcNNk , optimVersion
+26-12-2021 17:04:36,3963.19,dbscrn,12
+26-12-2021 17:06:26,0.429958,dataTimeLoading
+26-12-2021 17:06:30,1.44415,calcNNk , pure version
+26-12-2021 17:06:31,1.54844,calcNNk , optimVersion
+26-12-2021 17:06:33,3036.91,dbscrn,12
+26-12-2021 17:13:30,148484,dataTimeLoading
+26-12-2021 17:15:00,4.86605,calcNNk , pure version
+26-12-2021 17:15:03,2.312,calcNNk , optimVersion
+26-12-2021 17:15:33,77922.5,dbscrn,12
+26-12-2021 17:17:19,5491.19,dataTimeLoading
+26-12-2021 17:17:20,1.57394,calcNNk , pure version
+26-12-2021 17:18:06,3.80834,calcNNk , optimVersion
+26-12-2021 17:19:53,153015,dbscrn,12
+26-12-2021 17:21:33,0.449056,dataTimeLoading
+26-12-2021 17:21:35,1.45608,calcNNk , pure version
+26-12-2021 17:22:00,1.36281,calcNNk , optimVersion
+26-12-2021 17:22:08,33526.3,dbscrn,12
+26-12-2021 17:25:34,0.446873,dataTimeLoading
+26-12-2021 17:25:36,1.44478,calcNNk , pure version
+26-12-2021 17:25:39,3.83305,calcNNk , optimVersion
+26-12-2021 17:25:49,12321.8,dbscrn,12
+26-12-2021 17:26:03,0.430667,dataTimeLoading
+26-12-2021 17:26:05,1.26948,calcNNk , pure version
+26-12-2021 17:26:07,1.26994,calcNNk , optimVersion
+26-12-2021 17:26:10,5190.58,dbscrn,12
+26-12-2021 17:26:28,0.38082,dataTimeLoading
+26-12-2021 17:26:37,1.71378,calcNNk , pure version
+26-12-2021 17:27:38,0.410504,dataTimeLoading
+26-12-2021 17:27:39,1.58586,calcNNk , pure version
+26-12-2021 19:43:58,0.40509,dataTimeLoading
+26-12-2021 19:44:30,1.26452,calcNNk , pure version
+26-12-2021 19:47:00,0.384606,dataTimeLoading
+26-12-2021 19:47:02,1.26399,calcNNk , pure version
+26-12-2021 19:51:02,0.383059,dataTimeLoading
+26-12-2021 19:51:07,1.25595,calcNNk , pure version
+26-12-2021 19:53:58,0.467704,dataTimeLoading
+26-12-2021 19:54:00,3.41472,calcNNk , pure version
+26-12-2021 19:56:12,0.390464,dataTimeLoading
+26-12-2021 19:56:14,3.41688,calcNNk , pure version
+26-12-2021 19:57:48,0.401973,dataTimeLoading
+26-12-2021 19:58:17,1.2704,calcNNk , pure version
+26-12-2021 20:00:39,0.407224,dataTimeLoading
+26-12-2021 20:00:46,1.42983,calcNNk , pure version
+26-12-2021 20:03:10,0.408237,dataTimeLoading
+26-12-2021 20:03:22,3.85215,calcNNk , pure version
+26-12-2021 20:05:32,0.396732,dataTimeLoading
+26-12-2021 20:05:40,1.26432,calcNNk , pure version
+26-12-2021 20:07:02,81760.9,calcNNk , optimVersion
+26-12-2021 20:07:02,82415.6,dbscrn,12
+26-12-2021 20:11:27,0.436544,dataTimeLoading
+26-12-2021 20:11:31,1.27638,calcNNk , pure version
+26-12-2021 20:13:44,0.461466,dataTimeLoading
+26-12-2021 20:13:48,3.83366,calcNNk , pure version
+27-12-2021 01:26:31,0.548079,dataTimeLoading
+27-12-2021 01:26:32,1.31284,calcNNk , pure version
+27-12-2021 01:27:26,0.429111,dataTimeLoading
+27-12-2021 01:27:28,2.0528,calcNNk , pure version
+27-12-2021 01:27:57,0.712741,dataTimeLoading
+27-12-2021 01:27:59,1.64634,calcNNk , pure version
+27-12-2021 01:31:56,0.615479,dataTimeLoading
+27-12-2021 01:31:57,1.48283,calcNNk , pure version
+27-12-2021 01:32:38,0.662548,dataTimeLoading
+27-12-2021 01:32:39,1.56828,calcNNk , pure version
+27-12-2021 01:33:27,0.432979,dataTimeLoading
+27-12-2021 01:33:27,1.39545,calcNNk , pure version
+27-12-2021 11:49:29,1.70335,dataTimeLoading
+27-12-2021 11:49:32,1.68895,calcNNk , pure version
+27-12-2021 11:53:14,221771,calcNNk , optimVersion
+27-12-2021 11:53:15,223095,dbscrn,12
+27-12-2021 11:55:44,0.365456,dataTimeLoading
+27-12-2021 11:56:47,0.457195,dataTimeLoading
+27-12-2021 11:56:51,1.25258,calcNNk , pure version
+27-12-2021 12:22:09,0.424366,dataTimeLoading
+27-12-2021 12:22:13,1.26429,calcNNk , pure version
+27-12-2021 12:24:50,0.343732,dataTimeLoading
+27-12-2021 12:25:23,1.29482,calcNNk , pure version
+27-12-2021 12:27:06,0.364807,dataTimeLoading
+27-12-2021 12:27:34,1.26714,calcNNk , pure version
+27-12-2021 12:40:12,0.449415,dataTimeLoading
+27-12-2021 12:42:06,0.396159,dataTimeLoading
+27-12-2021 12:49:50,0.392263,dataTimeLoading
+27-12-2021 12:50:43,0.385833,dataTimeLoading
+27-12-2021 12:55:05,0.499457,dataTimeLoading
+27-12-2021 12:55:19,1.20257,calcNNk , pure version
+27-12-2021 12:56:42,0.365692,dataTimeLoading
+27-12-2021 12:56:45,1.2107,calcNNk , pure version
+27-12-2021 12:57:53,0.343122,dataTimeLoading
+27-12-2021 12:57:55,3.20831,calcNNk , pure version
+27-12-2021 12:59:07,0.493118,dataTimeLoading
+27-12-2021 12:59:09,1.19487,calcNNk , pure version
+27-12-2021 13:00:37,0.386032,dataTimeLoading
+27-12-2021 13:00:38,1.90761,calcNNk , pure version
+27-12-2021 13:02:01,0.421811,dataTimeLoading
+27-12-2021 13:02:02,3.25298,calcNNk , pure version
+27-12-2021 13:02:35,0.401031,dataTimeLoading
+27-12-2021 13:02:35,1.23552,calcNNk , pure version
+27-12-2021 13:03:16,0.395502,dataTimeLoading
+27-12-2021 13:03:17,1.27173,calcNNk , pure version
+27-12-2021 13:08:11,0.368963,dataTimeLoading
+27-12-2021 13:08:13,1.92291,calcNNk , pure version
+27-12-2021 13:13:02,0.40847,dataTimeLoading
+27-12-2021 13:13:05,1.41057,calcNNk , pure version
+27-12-2021 13:14:33,0.397706,dataTimeLoading
+27-12-2021 13:14:35,2.59115,calcNNk , pure version
+27-12-2021 13:24:06,0.566193,dataTimeLoading
+27-12-2021 13:24:15,1.35844,calcNNk , pure version
+27-12-2021 13:32:47,0.449535,dataTimeLoading
+27-12-2021 16:25:28,0.416415,dataTimeLoading
+27-12-2021 16:27:34,0.428659,dataTimeLoading
+27-12-2021 16:29:39,123046,calcNNk , pure version
+27-12-2021 16:30:22,40949.5,calcNNk , optimVersion
+27-12-2021 16:30:22,166346,dbscrn,12
+27-12-2021 18:47:00,0.401773,dataTimeLoading
+27-12-2021 18:47:03,0.846314,calcNNk , pure version
+27-12-2021 18:54:58,0.484713,dataTimeLoading
+27-12-2021 18:55:01,0.850442,calcNNk , pure version
+27-12-2021 18:55:58,56496.6,calcNNk , optimVersion
+27-12-2021 18:55:58,57275.1,dbscrn,12
+27-12-2021 19:01:57,0.490324,dataTimeLoading
+27-12-2021 19:01:57,0.972192,calcNNk , pure version
+27-12-2021 19:01:57,8.79256,calcNNk , optimVersion
+27-12-2021 19:01:57,10.1476,dbscrn,12
+27-12-2021 19:03:54,0.431882,dataTimeLoading
+27-12-2021 19:03:54,0.857676,calcNNk , pure version
+27-12-2021 19:03:54,8.30575,calcNNk , optimVersion
+27-12-2021 19:03:54,9.60482,dbscrn,12

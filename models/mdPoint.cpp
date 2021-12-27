@@ -12,10 +12,23 @@
 
 using namespace std;
 
+void kPlusElements(vector<MDPointWithIndex> &neighbour, MDPoint referencePoint, int k)
+{
+    vector<MDPointWithIndex> result;
+    double distLimit = neighbour[k].point.distToPoint(referencePoint);
+    copy_if(neighbour.begin(), neighbour.end(), back_inserter(result), [distLimit, &referencePoint](MDPointWithIndex point)
+            { return point.point.id != referencePoint.id && point.point.distToPoint(referencePoint) <= distLimit; });
+    neighbour = result;
+}
+
 void sortVector(vector<MDPointWithIndex> &neighbour, MDPoint referencePoint)
 {
-    sort(neighbour.begin(), neighbour.end(), [&referencePoint](MDPointWithIndex &pointA, MDPointWithIndex &pointB)
-         { return pointA.point.distToPoint(referencePoint) < pointB.point.distToPoint(referencePoint); });
+    for (auto &point : neighbour)
+    {
+        point.dist = point.point.distToPoint(referencePoint);
+    }
+    sort(neighbour.begin(), neighbour.end(), [](MDPointWithIndex &pointA, MDPointWithIndex &pointB)
+         { return pointA.dist < pointB.dist; });
 };
 
 MDPoint::MDPoint(string rowData) : clasterId(-1), rnnk(0)
@@ -105,39 +118,67 @@ void MDPoint::calcNNk(int k, vector<MDPoint> &data)
     }
 }
 
+vector<MDPointWithIndex> findNeighbours(double eps, MDPoint referencePoint, vector<MDPoint> &data, vector<MDPointWithIndex> &neighbours)
+{
+    MDPointWithIndex lastPoint = neighbours.back();
+    double minTanimotoSimilarity = 1 - lastPoint.point.distToPoint(referencePoint);
+    if (eps >= minTanimotoSimilarity)
+    {
+        vector<MDPointWithIndex> newNeighbours;
+        TanimotoLengthRange rangeLength;
+        rangeLength = vectorLengthRange(referencePoint.lengthOfVector, minTanimotoSimilarity);
+        newNeighbours = vectorSubrange(rangeLength, data);
+        for (auto point : newNeighbours)
+        {
+            double similarityCandidate = 1 - point.point.distToPoint(referencePoint);
+            bool isGreaterSimilarity = similarityCandidate > minTanimotoSimilarity;
+            bool isInNeighbour = false;
+            bool isReferencePoint = referencePoint.id == point.point.id;
+            for (auto n : neighbours)
+            {
+                if (n.index == point.index)
+                {
+                    isInNeighbour = true;
+                    break;
+                }
+            }
+            if (isGreaterSimilarity && !isInNeighbour && !isReferencePoint)
+            {
+                neighbours.pop_back();
+                neighbours.push_back(point);
+                sortVector(neighbours, referencePoint);
+                findNeighbours(similarityCandidate, referencePoint, data, neighbours);
+            }
+        }
+    }
+    return neighbours;
+}
+
 void MDPoint::optimCalcNNk(int k, vector<MDPoint> &data)
 {
     vector<MDPointWithIndex> neighbour;
     int iterator = 0;
     MDPoint tempPoint;
-    double initialTanimotoSimilarity = 0.95;
+    double initialTanimotoSimilarity = 1.0;
     TanimotoLengthRange rangeLength;
     do
     {
+        initialTanimotoSimilarity -= 0.1;
         rangeLength = vectorLengthRange(this->lengthOfVector, initialTanimotoSimilarity);
         neighbour = vectorSubrange(rangeLength, data);
-        initialTanimotoSimilarity -= 0.1;
-    } while (neighbour.size() < k+1 && initialTanimotoSimilarity > 0);
+    } while (neighbour.size() < k + 1 && initialTanimotoSimilarity > 0);
     sortVector(neighbour, *this);
-    iterator = 0;
 
-    double tempDist = neighbour[k].point.distToPoint(*this);
-    for (iterator = 1; iterator < neighbour.size(); iterator++)
+    bool isNewTheSameAsOld = false;
+
+    kPlusElements(neighbour, *this, k);
+
+    auto result = findNeighbours(initialTanimotoSimilarity, *this, data, neighbour);
+
+    for (auto p : result)
     {
-        MDPointWithIndex tempPointWithIndex = neighbour[iterator];
-        if (iterator >= k+1)
-        {
-            double dist = tempPointWithIndex.point.distToPoint(*this);
-            if (dist > tempDist)
-            {
-                break;
-            }
-        }
-        this->nnk.push_back(tempPointWithIndex.point.id);
-        data[tempPointWithIndex.index].rnnk += 1;
+        this->nnk.push_back(p.point.id);
+        data[p.index].rnnk += 1;
     }
     return;
-
-    // copy_if(data.begin(), data.end(), back_inserter(potentialNeighbour), [&rangeLength](MDPoint i)
-    //         { return i.lengthOfVector >= rangeLength.minLength && i.lengthOfVector <= rangeLength.maxLength; });
 }

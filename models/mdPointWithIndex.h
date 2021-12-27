@@ -10,6 +10,7 @@ class MDPointWithIndex {
     public:
     MDPoint point;
     long index;
+    double dist;
     MDPointWithIndex(MDPoint point, long index);
 };
 #endif

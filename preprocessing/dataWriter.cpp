@@ -42,7 +42,8 @@ void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
                 resultFile << nn << ";";
             }
             resultFile << "],";
-            resultFile << point.rnnk << "\n";
+            resultFile << point.rnnk << ",";
+            resultFile << point.lengthOfVector << "\n";
         }
         resultFile.close();
     }

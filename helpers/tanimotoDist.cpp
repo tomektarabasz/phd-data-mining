@@ -39,9 +39,16 @@ double tanimotoAplhaCoefficient(double eps, bool isMin)
 
 TanimotoLengthRange vectorLengthRange(double vectorLength, double tanimotoSimilarity)
 {
+    TanimotoLengthRange result;
+    if (tanimotoSimilarity == 0)
+    {
+        result.minLength = 0;
+        result.maxLength = vectorLength * 100;
+        return result;
+    }
     double alphaMin = tanimotoAplhaCoefficient(tanimotoSimilarity, true);
     double alphaMax = tanimotoAplhaCoefficient(tanimotoSimilarity, false);
-    TanimotoLengthRange result;
+
     result.minLength = vectorLength * alphaMin;
     result.maxLength = alphaMax * vectorLength;
     return result;
