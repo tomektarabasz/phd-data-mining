@@ -417,3 +417,26 @@
 27-12-2021 19:03:54,0.857676,calcNNk , pure version
 27-12-2021 19:03:54,8.30575,calcNNk , optimVersion
 27-12-2021 19:03:54,9.60482,dbscrn,12
+27-12-2021 19:18:09,5.40853,dataTimeLoading
+27-12-2021 19:18:10,169.848,calcNNk , pure version
+27-12-2021 19:18:10,375.627,calcNNk , optimVersion
+27-12-2021 19:18:10,547.698,dbscrn,200
+dim512
+27-12-2021 20:47:22,792.665,dataTimeLoading
+27-12-2021 20:47:47,25442.9,calcNNk , pure version
+27-12-2021 20:48:21,33048,calcNNk , optimVersion
+27-12-2021 20:48:21,59062.6,dbscrn,1024
+complex9
+27-12-2021 21:42:52,303.902,dataTimeLoading
+27-12-2021 21:43:19,26958.5,calcNNk , pure version
+27-12-2021 21:44:01,41480,calcNNk , optimVersion
+27-12-2021 21:44:01,68464.5,dbscrn,3031
+cluto-t7-10k
+27-12-2021 21:57:43,870.089,dataTimeLoading
+27-12-2021 22:02:14,270897,calcNNk , pure version
+27-12-2021 22:10:22,488479,calcNNk , optimVersion
+27-12-2021 22:10:22,759464,dbscrn,10000
+27-12-2021 22:15:27,2148.3,dataTimeLoading
+27-12-2021 22:37:35,1.32735e+06,calcNNk , pure version
+27-12-2021 23:49:29,4.3139e+06,calcNNk , optimVersion
+27-12-2021 23:49:29,5.64164e+06,dbscrn,20000

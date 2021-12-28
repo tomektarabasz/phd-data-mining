@@ -12,7 +12,13 @@ using namespace std;
 
 int main()
 {
-    string pathToFile = "Data/lecture.csv";
+    // string pathToFile = "Data/lecture.csv";
+    // string pathToFile = "Data/points.csv";
+    // string pathToFile = "Data/dim512.csv";
+    // string pathToFile = "Data/complex9.csv";
+    // string pathToFile = "Data/cluto-t7-10k.csv";
+    string pathToFile = "Data/letter.csv";
+
     string pathToStoreTimeOfExecution = "Data/time.csv";
 
     //Data access
