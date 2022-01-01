@@ -13,13 +13,16 @@ public:
     vector<double> attributes;
     long clasterId;
     vector<string> nnk;
+    vector<unsigned long> neighbourIndexes;
+    vector<unsigned long> reverseNeighbourIndexes;
     // vector<unsigned long> rnnk;
     long rnnk;
     double lengthOfVector;
     MDPoint(string rowData);
     MDPoint();
     double distToPoint(MDPoint &Point);
-    void calcNNk(int k, vector<MDPoint> &data);
-    void optimCalcNNk(int k, vector<MDPoint> &data);
+    void calcNNk(int k, vector<MDPoint> &data, unsigned long index);
+    void optimCalcNNk(int k, vector<MDPoint> &data, unsigned long index);
+    void assingToTheSameClusterId(vector<MDPoint> &data);
 };
 #endif

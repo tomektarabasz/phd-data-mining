@@ -3,9 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 
-paths = {"dbscan":r'./Data/dbscanResult.csv',"test":r'./Data/test.csv',"lecture":r'./Data/lecture.csv'}
+paths = {"dbscrn-optim":r'./Data/optimNNk1.csv'}
 
-path = paths["dbscan"]
+path = paths["dbscrn-optim"]
 
 # df = pd.read_csv(r'../Data/dbscanResult.csv',names=["id","x1","x2","clasterId"])
 df = pd.read_csv(path,names=["id","x1","x2","clasterId"])

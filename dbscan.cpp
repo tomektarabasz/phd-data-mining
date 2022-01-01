@@ -1,44 +1,48 @@
 #include <iostream>
 #include "models/purity.h"
-#include "preprocessing/pointLoader.h"
+#include "helpers/timeMeasure.h"
+#include "preprocessing/mdPointLoader.h"
 #include "./preprocessing/dataWriter.h"
+#include "helpers/identyficator.h"
 #include <vector>
 #include <map>
-#include "models/point.h"
+#include "models/mdPoint.h"
+#include "helpers/findNeighbours.h"
+#include <algorithm>
 
 using namespace std;
 
-void filterNeighbour(vector<int> &neighbour, vector<Point> &allData)
+void filterNeighbourFromAlreadyCalculatedPoints(vector<unsigned long> &seed, vector<MDPoint> &allData)
 {
-    Point point(0, 0, 0);
-    vector<int> result;
-    for (auto i : neighbour)
-    {
-        point = allData[i];
-        if (point.neighbourNumber == -1)
-        {
-            result.push_back(i);
-        };
-    };
-    neighbour = result;
-};
+    vector<unsigned long> result;
+    copy_if(seed.begin(), seed.end(), back_inserter(result), [&allData](unsigned long index)
+            { return allData[index].clasterId == -1; });
+    seed = result;
+}
 
-void buildClaster(vector<int> &seeds, vector<Point> &allData, int numberOfMinNeighbour, long clasterId, double eps)
+void buildClaster(vector<unsigned long> &seeds, vector<MDPoint> &allData, int numberOfMinNeighbour, long clasterId, double eps)
 {
     if (seeds.size() < 1)
     {
         return;
     }
-    vector<int> neighbours;
-    Point& point = allData[seeds.back()];
-
-    neighbours = findNeigbour(point, allData, eps);
-    point.neighbourNumber = neighbours.size();
-    if (neighbours.size() >= numberOfMinNeighbour)
+    for (auto index : seeds)
     {
-        filterNeighbour(neighbours, allData);
-        assingClusterId(neighbours, allData, clasterId);
-        buildClaster(neighbours, allData, numberOfMinNeighbour, clasterId, eps);
+        MDPoint &p = allData[index];
+        if (p.clasterId == -1)
+        {
+            p.clasterId = clasterId;
+        }
+    }
+    MDPoint &point = allData[seeds.back()];
+
+    findNeigbour(point, allData, eps);
+    if (point.neighbourIndexes.size() >= numberOfMinNeighbour)
+    {
+        vector<unsigned long> seeds = point.neighbourIndexes;
+        filterNeighbourFromAlreadyCalculatedPoints(seeds, allData);
+        // point.assingToTheSameClusterId(allData);
+        buildClaster(seeds, allData, numberOfMinNeighbour, clasterId, eps);
     };
     seeds.pop_back();
     buildClaster(seeds, allData, numberOfMinNeighbour, clasterId, eps);
@@ -46,35 +50,50 @@ void buildClaster(vector<int> &seeds, vector<Point> &allData, int numberOfMinNei
 
 int main()
 {
-    cout << "Hellow Word" << endl;
-    //Read data
-    string pathToFile = "Data/points.csv";
-    PointLoader dataReader;
-    vector<Point> *data = new vector<Point>(dataReader.getData(pathToFile));
-    vector<Point> &dataR = *data;
-    // Main process
-    int numberOfMinNeighbour = 4;
-    double eps = 0.10;
-    unsigned long currentClasterId = 1;
-    vector<int> currentNeighbours;
+    string pathToStoreTimeOfExecution = "Data/time.csv";
 
-    for (auto currentPoint : dataR)
+    //Read data
+    string pathToFile = "Data/lecture.csv";
+    // string pathToFile = "Data/points.csv";
+    // string pathToFile = "Data/dim512.csv";
+    // string pathToFile = "Data/complex9.csv";
+    // string pathToFile = "Data/cluto-t7-10k.csv";
+    // string pathToFile = "Data/letter.csv";
+    // string pathToFile = "Data/points.csv";
+    // end choose of files
+    MDPointLoader dataReader;
+    vector<MDPoint> *data = new vector<MDPoint>(dataReader.getData(pathToFile));
+    vector<MDPoint> &dataR = *data;
+    // Main process
+    TimeWriter *timeWriter = new TimeWriter(pathToStoreTimeOfExecution, Identyficator("dbscan", to_string(dataR.size())));
+    timeWriter->start();
+    int numberOfMinNeighbour = 4;
+    double eps = 2;
+    unsigned long currentClasterId = 1;
+    int currentNeighboursNumber;
+
+    for (auto &currentPoint : dataR)
     {
         if (currentPoint.clasterId == -1)
         {
-            currentNeighbours = findNeigbour(currentPoint, dataR, eps);
+            findNeigbour(currentPoint, dataR, eps);
+            currentNeighboursNumber = currentPoint.neighbourIndexes.size();
             // if it it core assing cluster id
-            if (currentNeighbours.size() >= numberOfMinNeighbour)
+            if (currentNeighboursNumber >= numberOfMinNeighbour)
             {
-                assingClusterId(currentNeighbours, dataR, currentClasterId);
-                buildClaster(currentNeighbours, dataR, numberOfMinNeighbour, currentClasterId, eps);
+                currentPoint.clasterId = currentClasterId;
+                // currentPoint.assingToTheSameClusterId(dataR);
+                buildClaster(currentPoint.neighbourIndexes, dataR, numberOfMinNeighbour, currentClasterId, eps);
                 currentClasterId++;
             }
         }
     }
+    timeWriter->stop();
+    timeWriter->writeTime();
+
     DataWriter dataWriter;
     string pathToResultFile = "Data/dbscanResult.csv";
-    dataWriter.write(pathToResultFile,dataR);
+    dataWriter.writeClasteringResults(pathToResultFile, dataR);
     delete data;
 
     return 0;

@@ -436,7 +436,116 @@ cluto-t7-10k
 27-12-2021 22:02:14,270897,calcNNk , pure version
 27-12-2021 22:10:22,488479,calcNNk , optimVersion
 27-12-2021 22:10:22,759464,dbscrn,10000
+letter
 27-12-2021 22:15:27,2148.3,dataTimeLoading
 27-12-2021 22:37:35,1.32735e+06,calcNNk , pure version
 27-12-2021 23:49:29,4.3139e+06,calcNNk , optimVersion
 27-12-2021 23:49:29,5.64164e+06,dbscrn,20000
+lecture
+30-12-2021 17:42:13,1.86571,dataTimeLoading
+30-12-2021 17:42:21,4.67044,calcNNk , pure version
+30-12-2021 17:42:21,42.0984,calcNNk , optimVersion
+30-12-2021 17:42:21,49.9002,dbscrn,12
+dbsacn
+01-01-2022 15:58:49,0.475445,dbscan,12
+01-01-2022 16:00:46,103.462,dbscan,200
+01-01-2022 16:02:10,113.619,dbscan,200
+01-01-2022 16:08:16,218561,dbscan,10000
+01-01-2022 16:36:54,0.494329,dbscan,12
+01-01-2022 17:13:56,0.502118,dataTimeLoading
+01-01-2022 17:14:07,3.09274,calcNNk , pure version
+01-01-2022 17:25:05,0.491897,dataTimeLoading
+01-01-2022 17:25:07,2.00826,calcNNk , pure version
+01-01-2022 17:29:03,0.444986,dataTimeLoading
+01-01-2022 17:29:05,2.04474,calcNNk , pure version
+01-01-2022 17:29:57,31395.8,calcNNk , optimVersion
+01-01-2022 17:35:31,385129,dbscrn,12
+01-01-2022 17:38:16,0.424766,dataTimeLoading
+01-01-2022 17:38:18,2.23585,calcNNk , pure version
+01-01-2022 17:38:20,2.93049,calcNNk , optimVersion
+01-01-2022 17:38:20,2073.06,dbscrn,12
+01-01-2022 18:05:15,0.504298,dataTimeLoading
+01-01-2022 18:05:15,1.46758,calcNNk , pure version
+01-01-2022 18:05:15,15.4442,calcNNk , optimVersion
+01-01-2022 18:05:15,17.3921,dbscrn,12
+01-01-2022 18:28:12,0.449079,dataTimeLoading
+01-01-2022 18:28:12,15.0833,calcNNk , optimVersion
+01-01-2022 18:28:12,15.5382,dbscrn,12
+01-01-2022 18:28:28,0.442098,dataTimeLoading
+01-01-2022 18:28:28,15.0583,calcNNk , optimVersion
+01-01-2022 18:28:28,15.5604,dbscrn,12
+01-01-2022 18:37:04,0.468619,dataTimeLoading
+01-01-2022 18:37:04,18.9464,calcNNk , optimVersion
+01-01-2022 18:37:04,19.2916,dbscrn,12
+01-01-2022 18:45:16,0.433116,dataTimeLoading
+01-01-2022 18:45:16,1.50082,calcNNk , pure version
+01-01-2022 18:46:19,0.416494,dataTimeLoading
+01-01-2022 18:46:19,1.89962,calcNNk , pure version
+01-01-2022 18:49:37,0.391253,dataTimeLoading
+01-01-2022 18:49:37,1.58882,calcNNk , pure version
+01-01-2022 18:50:36,0.443839,dataTimeLoading
+01-01-2022 18:50:36,1.4741,calcNNk , pure version
+01-01-2022 18:50:36,1.71253,dbscrn,12
+01-01-2022 18:52:56,0.443467,dataTimeLoading
+01-01-2022 18:52:56,1.56372,calcNNk , pure version
+01-01-2022 18:52:56,1.77366,dbscrn,12
+01-01-2022 18:53:32,0.380574,dataTimeLoading
+01-01-2022 18:53:32,1.55017,calcNNk , pure version
+01-01-2022 18:53:33,14.5101,calcNNk , optimVersion
+01-01-2022 18:54:09,0.467092,dataTimeLoading
+01-01-2022 18:54:09,1.56086,calcNNk , pure version
+01-01-2022 18:54:09,15.7219,calcNNk , optimVersion
+01-01-2022 18:54:09,17.5854,dbscrn,12
+01-01-2022 18:54:54,0.486399,dataTimeLoading
+01-01-2022 18:54:54,1.86841,calcNNk , pure version
+01-01-2022 18:54:54,18.6102,calcNNk , optimVersion
+01-01-2022 18:54:54,20.8654,dbscrn,12
+01-01-2022 18:55:34,0.425958,dataTimeLoading
+01-01-2022 18:55:34,1.52273,calcNNk , pure version
+01-01-2022 18:55:34,14.5215,calcNNk , optimVersion
+01-01-2022 18:55:34,16.3247,dbscrn,12
+01-01-2022 18:56:35,0.412679,dataTimeLoading
+01-01-2022 18:56:35,1.47968,calcNNk , pure version
+01-01-2022 18:56:35,14.5863,calcNNk , optimVersion
+01-01-2022 18:56:35,16.3463,dbscrn,12
+01-01-2022 18:56:57,0.424256,dataTimeLoading
+01-01-2022 18:56:57,1.7949,calcNNk , pure version
+01-01-2022 18:56:57,14.9271,calcNNk , optimVersion
+01-01-2022 18:56:57,17.0716,dbscrn,12
+01-01-2022 18:57:18,0.354766,dataTimeLoading
+01-01-2022 18:57:18,1.55862,calcNNk , pure version
+01-01-2022 18:57:18,14.7034,calcNNk , optimVersion
+01-01-2022 18:57:18,16.5845,dbscrn,12
+01-01-2022 18:58:18,0.448649,dataTimeLoading
+01-01-2022 18:58:18,1.56589,calcNNk , pure version
+01-01-2022 18:58:18,14.7879,calcNNk , optimVersion
+01-01-2022 19:01:09,0.437131,dataTimeLoading
+01-01-2022 19:01:09,1.50125,calcNNk , pure version
+01-01-2022 19:01:09,16.411,calcNNk , optimVersion
+01-01-2022 19:02:05,0.386894,dataTimeLoading
+01-01-2022 19:02:08,4.45413,calcNNk , pure version
+01-01-2022 19:02:29,11820.9,calcNNk , optimVersion
+01-01-2022 19:05:33,0.501597,dataTimeLoading
+01-01-2022 19:05:42,1.52354,calcNNk , pure version
+01-01-2022 19:05:44,16.8348,calcNNk , optimVersion
+01-01-2022 19:08:35,0.402293,dataTimeLoading
+01-01-2022 19:08:38,3.89863,calcNNk , pure version
+01-01-2022 19:08:41,21.9002,calcNNk , optimVersion
+01-01-2022 19:12:05,0.493194,dataTimeLoading
+01-01-2022 19:12:10,4.64171,calcNNk , pure version
+01-01-2022 19:12:10,34.3089,calcNNk , optimVersion
+01-01-2022 19:13:05,0.415694,dataTimeLoading
+01-01-2022 19:17:28,0.395578,dataTimeLoading
+01-01-2022 19:17:33,4.47166,calcNNk , pure version
+01-01-2022 19:17:33,37.7348,calcNNk , optimVersion
+01-01-2022 19:18:53,0.490855,dataTimeLoading
+01-01-2022 19:18:56,1.45417,calcNNk , pure version
+01-01-2022 19:18:57,24.8528,calcNNk , optimVersion
+01-01-2022 19:23:47,0.393176,dataTimeLoading
+01-01-2022 19:23:48,1.69788,calcNNk , pure version
+01-01-2022 19:23:52,34.4216,calcNNk , optimVersion
+01-01-2022 19:24:22,33649.2,dbscrn,12
+01-01-2022 19:25:43,0.516158,dataTimeLoading
+01-01-2022 19:25:43,1.57773,calcNNk , pure version
+01-01-2022 19:25:43,15.8924,calcNNk , optimVersion
+01-01-2022 19:25:43,17.9886,dbscrn,12

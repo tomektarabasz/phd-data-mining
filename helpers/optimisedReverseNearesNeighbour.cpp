@@ -20,9 +20,11 @@ void OptimisedRNN(vector<MDPoint> &data, int k)
     sort(data.begin(), data.end(), [](MDPoint &pointA, MDPoint &pointB)
          { return pointA.lengthOfVector < pointB.lengthOfVector; });
 
+    size_t index=0;
     for (auto& point : data)
     {
-        point.optimCalcNNk(k,data);
+        point.optimCalcNNk(k,data, index);
+        index++;
     }
 
     timeWriter.stop();

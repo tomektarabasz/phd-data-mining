@@ -12,6 +12,7 @@ class DataWriter
 public:
     static void write(string pathToFile, vector<Point>& data);
     static void writeMDPoints(string pathToFile, vector<MDPoint>& data);
+    static void writeClasteringResults(string pathToFile, vector<MDPoint> &data);
     ~DataWriter();
 };
 #endif

@@ -2,11 +2,11 @@
 #include "mdPoint.h"
 #include "../preprocessing/splitedStringResult.h"
 #include "../helpers/tanimpotoDist.h"
+#include "../helpers/euclideanDist.h"
 #include <vector>
 #include <algorithm>
 #include <string>
 #include "../helpers/timeMeasure.h"
-#include "mdPointWithIndex.h"
 #include "../helpers/vectorLength.h"
 #include "../helpers/vectorSubrange.h"
 
@@ -61,11 +61,12 @@ MDPoint::MDPoint(){};
 
 double MDPoint::distToPoint(MDPoint &point2)
 {
+    // double dist = euclideanDist(*this, point2);
     double dist = tanimotoDist(*this, point2);
     return dist;
 }
 
-void MDPoint::calcNNk(int k, vector<MDPoint> &data)
+void MDPoint::calcNNk(int k, vector<MDPoint> &data, unsigned long index)
 {
     vector<MDPointWithIndex> neighbour;
     int iterator = 0;
@@ -111,10 +112,12 @@ void MDPoint::calcNNk(int k, vector<MDPoint> &data)
     for (auto point : neighbour)
     {
         this->nnk.push_back(point.point.id);
+        this->neighbourIndexes.push_back(point.index);
     }
     for (auto point : neighbour)
     {
         data[point.index].rnnk += 1;
+        data[point.index].reverseNeighbourIndexes.push_back(index);
     }
 }
 
@@ -154,7 +157,7 @@ vector<MDPointWithIndex> findNeighbours(double eps, MDPoint referencePoint, vect
     return neighbours;
 }
 
-void MDPoint::optimCalcNNk(int k, vector<MDPoint> &data)
+void MDPoint::optimCalcNNk(int k, vector<MDPoint> &data, unsigned long index)
 {
     vector<MDPointWithIndex> neighbour;
     int iterator = 0;
@@ -178,7 +181,21 @@ void MDPoint::optimCalcNNk(int k, vector<MDPoint> &data)
     for (auto p : result)
     {
         this->nnk.push_back(p.point.id);
+        this->neighbourIndexes.push_back(p.index);
         data[p.index].rnnk += 1;
+        data[p.index].reverseNeighbourIndexes.push_back(index);
     }
     return;
 }
+
+void MDPoint::assingToTheSameClusterId(vector<MDPoint> &data)
+{
+    for (auto index : this->neighbourIndexes)
+    {
+        MDPoint &tempPoint = data[index];
+        if (tempPoint.clasterId == -1)
+        {
+            tempPoint.clasterId = this->clasterId;
+        }
+    }
+};

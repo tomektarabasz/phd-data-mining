@@ -36,14 +36,41 @@ void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
             {
                 resultFile << attr << ",";
             }
-            resultFile << "[";
+            resultFile << "[,";
             for (auto nn : point.nnk)
             {
                 resultFile << nn << ";";
             }
             resultFile << "],";
             resultFile << point.rnnk << ",";
-            resultFile << point.lengthOfVector << "\n";
+            resultFile << "[,";
+            for (auto rn : point.reverseNeighbourIndexes)
+            {
+                resultFile << rn << ";";
+            }
+            resultFile << "],";
+            resultFile << point.lengthOfVector << ",";
+            resultFile << point.clasterId << "\n";
+        }
+        resultFile.close();
+    }
+    else
+        cout << "Unable to open file";
+}
+
+void DataWriter::writeClasteringResults(string pathToFile, vector<MDPoint> &data)
+{
+    ofstream resultFile(pathToFile);
+    if (resultFile.is_open())
+    {
+        for (auto point : data)
+        {
+            resultFile << point.id << ",";
+            for (auto attr : point.attributes)
+            {
+                resultFile << attr << ",";
+            }
+            resultFile << point.clasterId << "\n";
         }
         resultFile.close();
     }
