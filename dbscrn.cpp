@@ -21,40 +21,48 @@ void filterNeighbourFromAlreadyCalculatedPoints(vector<unsigned long> &seed, vec
 
 void buildClaster(vector<unsigned long> potentialSeeds, vector<MDPoint> &allData, int k, long clasterId)
 {
-    cout<<"buildClaster"<<endl;
+    cout << "buildClaster" << endl;
     if (potentialSeeds.size() < 1)
     {
         return;
     }
     for (auto index : potentialSeeds)
     {
-        MDPoint& p = allData[index];
+        MDPoint &p = allData[index];
         if (p.clasterId == -1)
         {
             p.clasterId = clasterId;
         }
+        if (p.rnnk >= k)
+        {
+            vector<unsigned long> newPotentialSeeds = p.reverseNeighbourIndexes;
+            filterNeighbourFromAlreadyCalculatedPoints(newPotentialSeeds, allData);
+            // point.assingToTheSameClusterId(allData);
+            buildClaster(newPotentialSeeds, allData, k, clasterId);
+        };
     }
-    MDPoint &point = allData[potentialSeeds.back()];
+    // MDPoint &point = allData[potentialSeeds.back()];
 
-    if (point.rnnk >= k)
-    {
-        vector<unsigned long> newPotentialSeeds = point.reverseNeighbourIndexes;
-        filterNeighbourFromAlreadyCalculatedPoints(newPotentialSeeds, allData);
-        // point.assingToTheSameClusterId(allData);
-        buildClaster(newPotentialSeeds, allData, k, clasterId);
-    };
-    potentialSeeds.pop_back();
-    buildClaster(potentialSeeds, allData, k, clasterId);
+    // if (point.rnnk >= k)
+    // {
+    //     vector<unsigned long> newPotentialSeeds = point.reverseNeighbourIndexes;
+    //     filterNeighbourFromAlreadyCalculatedPoints(newPotentialSeeds, allData);
+    //     // point.assingToTheSameClusterId(allData);
+    //     buildClaster(newPotentialSeeds, allData, k, clasterId);
+    // };
+    // potentialSeeds.pop_back();
+    // buildClaster(potentialSeeds, allData, k, clasterId);
 }
 
-void enterToBuildClaster(vector<MDPoint>& data, int k){
+void enterToBuildClaster(vector<MDPoint> &data, int k)
+{
     unsigned long currentClasterId = 1;
 
     for (auto &currentPoint : data)
     {
-        if (currentPoint.clasterId = -1)
+        if (currentPoint.clasterId == -1)
         {
-            if (currentPoint.rnnk > k)
+            if (currentPoint.rnnk >= k)
             {
                 currentPoint.clasterId = currentClasterId;
                 buildClaster(currentPoint.neighbourIndexes, data, k, currentClasterId);
@@ -88,7 +96,7 @@ int main()
 
     //Start procedure
     TimeWriter timeWriter(pathToStoreTimeOfExecution, Identyficator("dbscrn", to_string(dataR.size())));
-    int k = 4;
+    int k = 1;
     timeWriter.start();
 
     vector<MDPoint> dataOptim = *data;
@@ -96,22 +104,22 @@ int main()
     NaiveRNN(dataR, k);
     DataWriter dataWriter;
     string pathToResultFile = "Data/dbscrnResults.csv";
+    string pathToResultFileNaiveV = "Data/dbscrnResults_naive_v.csv";
     string pathToDebugFile = "Data/naiveVersionDebug.csv";
     dataWriter.writeMDPoints(pathToDebugFile, dataR);
 
     OptimisedRNN(dataOptimR, k);
-    pathToResultFile = "Data/optimVersionDebug.csv";
+    pathToDebugFile = "Data/optimVersionDebug.csv";
 
     //Clasters building
-    enterToBuildClaster(dataOptimR,k);
+    enterToBuildClaster(dataOptimR, k);
     // This it end and time calculation
     timeWriter.stop();
     timeWriter.writeTime();
-    dataWriter.writeMDPoints(pathToDebugFile,dataOptimR);
+    dataWriter.writeMDPoints(pathToDebugFile, dataOptimR);
     //End Claster building
     dataWriter.writeClasteringResults(pathToResultFile, dataOptimR);
-    dataWriter.writeClasteringResults(pathToResultFile,dataR);
-    
+    // dataWriter.writeClasteringResults(pathToResultFileNaiveV, dataR);
 
     return 0;
 }
