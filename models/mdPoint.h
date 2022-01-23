@@ -5,6 +5,13 @@
 
 using namespace std;
 
+class DistToPoint{
+    public:
+    string id;
+    unsigned long guid;
+    double dist;
+    DistToPoint(string id, unsigned long guid, double dist);
+};
 class MDPoint
 {
 public:
@@ -12,9 +19,11 @@ public:
     unsigned long guid;
     vector<double> attributes;
     long clasterId;
+    int pointType;
     vector<string> nnk;
     vector<unsigned long> neighbourIndexes;
     vector<unsigned long> reverseNeighbourIndexes;
+    vector<DistToPoint> distancesToOtherPoints;
     // vector<unsigned long> rnnk;
     long rnnk;
     double lengthOfVector;

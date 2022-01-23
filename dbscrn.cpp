@@ -8,6 +8,7 @@
 #include "helpers/naiveReverseNearesNeighbour.h"
 #include "helpers/optimisedReverseNearesNeighbour.h"
 #include "./preprocessing/dataWriter.h"
+#include <sstream>
 
 using namespace std;
 
@@ -31,15 +32,18 @@ void buildClaster(vector<unsigned long> potentialSeeds, vector<MDPoint> &allData
         MDPoint &p = allData[index];
         if (p.clasterId == -1)
         {
+            p.pointType = 0;
             p.clasterId = clasterId;
+
+            if (p.rnnk >= k)
+            {
+                p.pointType = 1;
+                vector<unsigned long> newPotentialSeeds = p.neighbourIndexes;
+                filterNeighbourFromAlreadyCalculatedPoints(newPotentialSeeds, allData);
+                // point.assingToTheSameClusterId(allData);
+                buildClaster(newPotentialSeeds, allData, k, clasterId);
+            };
         }
-        if (p.rnnk >= k)
-        {
-            vector<unsigned long> newPotentialSeeds = p.reverseNeighbourIndexes;
-            filterNeighbourFromAlreadyCalculatedPoints(newPotentialSeeds, allData);
-            // point.assingToTheSameClusterId(allData);
-            buildClaster(newPotentialSeeds, allData, k, clasterId);
-        };
     }
     // MDPoint &point = allData[potentialSeeds.back()];
 
@@ -65,6 +69,7 @@ void enterToBuildClaster(vector<MDPoint> &data, int k)
             if (currentPoint.rnnk >= k)
             {
                 currentPoint.clasterId = currentClasterId;
+                currentPoint.pointType = 1; //must be seed because have more rnnk;
                 buildClaster(currentPoint.neighbourIndexes, data, k, currentClasterId);
                 currentClasterId++;
             }
@@ -96,15 +101,26 @@ int main()
 
     //Start procedure
     TimeWriter timeWriter(pathToStoreTimeOfExecution, Identyficator("dbscrn", to_string(dataR.size())));
-    int k = 1;
+    int k = 2;
+    STAT statisticForNaiveVersion("Data/STAT_naive.csv");
+    STAT statisticForOptimVersion("Data/STAT_optim.csv");
+
+    ostringstream *oss = new ostringstream();
+    *oss << "k= " << k << endl;
+    *oss << "pathTofile = " << pathToFile;
+    string tempString = oss->str();
+    statisticForNaiveVersion.writeLine(tempString);
+    statisticForOptimVersion.writeLine(tempString);
+    delete (oss);
     timeWriter.start();
 
     vector<MDPoint> dataOptim = *data;
     vector<MDPoint> &dataOptimR = dataOptim;
     NaiveRNN(dataR, k);
+    enterToBuildClaster(dataR, k);
     DataWriter dataWriter;
-    string pathToResultFile = "Data/dbscrnResults.csv";
-    string pathToResultFileNaiveV = "Data/dbscrnResults_naive_v.csv";
+    string pathToResultFile = "Data/OUT.csv";
+    string pathToResultFileNaiveV = "Data/OUT_naive.csv";
     string pathToDebugFile = "Data/naiveVersionDebug.csv";
     dataWriter.writeMDPoints(pathToDebugFile, dataR);
 
@@ -119,7 +135,7 @@ int main()
     dataWriter.writeMDPoints(pathToDebugFile, dataOptimR);
     //End Claster building
     dataWriter.writeClasteringResults(pathToResultFile, dataOptimR);
-    // dataWriter.writeClasteringResults(pathToResultFileNaiveV, dataR);
+    dataWriter.writeClasteringResults(pathToResultFileNaiveV, dataR);
 
     return 0;
 }

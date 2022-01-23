@@ -29,6 +29,19 @@ void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
     ofstream resultFile(pathToFile);
     if (resultFile.is_open())
     {
+        resultFile << "id,";
+        int i = 0;
+        for (auto attr : data[0].attributes)
+        {
+            resultFile << "x" << i << ",";
+            i++;
+        }
+        resultFile << "len,";
+        resultFile << "clasteId,";
+        resultFile << "len(rnnk),";
+        resultFile << "kNN,";
+        resultFile << "reverskNN,";
+        resultFile << "\n";
         for (auto point : data)
         {
             resultFile << point.id << ",";
@@ -36,21 +49,24 @@ void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
             {
                 resultFile << attr << ",";
             }
+            resultFile << point.lengthOfVector << ",";
+            resultFile << point.clasterId << ",";
+            resultFile << point.rnnk << ",";
             resultFile << "[,";
             for (auto nn : point.nnk)
             {
                 resultFile << nn << ";";
             }
             resultFile << "],";
-            resultFile << point.rnnk << ",";
+
             resultFile << "[,";
             for (auto rn : point.reverseNeighbourIndexes)
             {
                 resultFile << rn << ";";
             }
             resultFile << "],";
-            resultFile << point.lengthOfVector << ",";
-            resultFile << point.clasterId << "\n";
+
+            resultFile << "\n";
         }
         resultFile.close();
     }
@@ -61,8 +77,22 @@ void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
 void DataWriter::writeClasteringResults(string pathToFile, vector<MDPoint> &data)
 {
     ofstream resultFile(pathToFile);
+
     if (resultFile.is_open())
     {
+        resultFile << "Id,";
+        int iter = 0;
+        MDPoint temp = data[0];
+        for (auto attr : temp.attributes)
+        {
+            resultFile << "x" << iter << ",";
+            iter++;
+        }
+        resultFile << "claserId,";
+        resultFile << "pointType,";
+        resultFile << "dist,";
+        resultFile << endl;
+
         for (auto point : data)
         {
             resultFile << point.id << ",";
@@ -70,9 +100,32 @@ void DataWriter::writeClasteringResults(string pathToFile, vector<MDPoint> &data
             {
                 resultFile << attr << ",";
             }
-            resultFile << point.clasterId << "\n";
+
+            resultFile << point.clasterId << ",";
+            resultFile << point.pointType << ",";
+
+            resultFile << "|,";
+            for (auto dist : point.distancesToOtherPoints)
+            {
+                resultFile << dist.id << "=" << dist.dist << ",";
+            }
+            resultFile << "|,";
+            resultFile << "\n";
         }
         resultFile.close();
+    }
+    else
+        cout << "Unable to open file";
+}
+
+STAT::STAT(string pathToFile) : pathToFile(pathToFile){};
+void STAT::writeLine(string line)
+{
+    ofstream resultFile(this->pathToFile, ios_base::app);
+
+    if (resultFile.is_open())
+    {
+        resultFile << line << endl;
     }
     else
         cout << "Unable to open file";
