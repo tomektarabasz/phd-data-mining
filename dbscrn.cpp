@@ -12,6 +12,11 @@
 
 using namespace std;
 
+bool isEnughtRNNToBeCorePoint(long rnn, long limit)
+{
+    return rnn > limit;
+};
+
 void filterNeighbourFromAlreadyCalculatedPoints(vector<unsigned long> &seed, vector<MDPoint> &allData)
 {
     vector<unsigned long> result;
@@ -22,7 +27,6 @@ void filterNeighbourFromAlreadyCalculatedPoints(vector<unsigned long> &seed, vec
 
 void buildClaster(vector<unsigned long> potentialSeeds, vector<MDPoint> &allData, int k, long clasterId)
 {
-    cout << "buildClaster" << endl;
     if (potentialSeeds.size() < 1)
     {
         return;
@@ -35,10 +39,10 @@ void buildClaster(vector<unsigned long> potentialSeeds, vector<MDPoint> &allData
             p.pointType = 0;
             p.clasterId = clasterId;
 
-            if (p.rnnk >= k)
+            if (isEnughtRNNToBeCorePoint(p.rnnk, k))
             {
                 p.pointType = 1;
-                vector<unsigned long> newPotentialSeeds = p.neighbourIndexes;
+                vector<unsigned long> newPotentialSeeds = p.reverseNeighbourIndexes;
                 filterNeighbourFromAlreadyCalculatedPoints(newPotentialSeeds, allData);
                 // point.assingToTheSameClusterId(allData);
                 buildClaster(newPotentialSeeds, allData, k, clasterId);
@@ -66,7 +70,7 @@ void enterToBuildClaster(vector<MDPoint> &data, int k)
     {
         if (currentPoint.clasterId == -1)
         {
-            if (currentPoint.rnnk >= k)
+            if (isEnughtRNNToBeCorePoint(currentPoint.rnnk, k))
             {
                 currentPoint.clasterId = currentClasterId;
                 currentPoint.pointType = 1; //must be seed because have more rnnk;
@@ -77,23 +81,91 @@ void enterToBuildClaster(vector<MDPoint> &data, int k)
     }
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    string pathToFile = "Data/lecture.csv";
+    string arg1 = argv[1];
+    string arg2 = argv[2];
+    cout << arg1 << endl;
+    cout << arg2 << endl;
+    int fileNumber = stoi(arg1);
+    int k = stoi(arg2);
+
+    string *paths = new string[5];
+    paths[0] = "Data/lecture.csv";
+    paths[1] = "Data/dim512.csv";
+    paths[2] = "Data/complex9.csv";
+    paths[3] = "Data/cluto-t7-10k.csv";
+    paths[4] = "Data/letter.csv";
+
+    string *fileIdentificators = new string[5];
+    fileIdentificators[0] = "lecture.csv";
+    fileIdentificators[1] = "dim512.csv";
+    fileIdentificators[2] = "complex9.csv";
+    fileIdentificators[3] = "cluto-t7-10k.csv";
+    fileIdentificators[4] = "letter.csv";
+
+    string postIndentificator = fileIdentificators[fileNumber];
+    string pathToStoreSTATfileNaive = "Data/STAT_dbscrn_naive_";
+    ostringstream *oss = new ostringstream();
+    *oss << pathToStoreSTATfileNaive << postIndentificator;
+    STAT statFileNaive(oss->str());
+    oss->str("");
+    string pathToStoreSTATfileOptim = "Data/STAT_dbscrn_optim_";
+    *oss << pathToStoreSTATfileOptim << postIndentificator;
+    STAT statFileOptim(oss->str());
+    oss->str("");
+
+    (*oss) << "Data/OUT_dbscrn_optim_" << postIndentificator;
+    string pathToOUTFileOptim = oss->str();
+    oss->str("");
+    (*oss) << "Data/OUT_dbscrn_naive_" << postIndentificator;
+    string pathToOUTFileNaive = oss->str();
+    oss->str("");
+
+    (*oss) << "Data/DEBUG_dbscrn_optim_" << postIndentificator;
+    string pathToDEBUGFileOptim = oss->str();
+    oss->str("");
+    (*oss) << "Data/DEBUG_dbscrn_naive_" << postIndentificator;
+    string pathToDEBUGFileNaive = oss->str();
+    oss->str("");
+
+    *oss << "k = " << k;
+    statFileNaive.params = oss->str();
+    statFileOptim.params = oss->str();
+
+    delete oss;
+
+    statFileNaive.algorithm = "DBSCRN";
+    statFileOptim.algorithm = "DBSCRN";
+
+    // string pathToFile = "Data/lecture.csv";
     // string pathToFile = "Data/points.csv";
     // string pathToFile = "Data/dim512.csv";
     // string pathToFile = "Data/complex9.csv";
     // string pathToFile = "Data/cluto-t7-10k.csv";
     // string pathToFile = "Data/letter.csv";
 
+    string pathToFile = paths[fileNumber];
+
+    statFileOptim.nameOfInputFile = pathToFile;
+    statFileNaive.nameOfInputFile = pathToFile;
+
     string pathToStoreTimeOfExecution = "Data/time.csv";
 
+    TimeWriter totalTimerNaive;
+    TimeWriter totalTimerOptim;
+    TimeWriter timer;
+    totalTimerNaive.start();
+    timer.start();
     //Data access
     TimeWriter *tempTimeWirter = new TimeWriter(pathToStoreTimeOfExecution, "dataTimeLoading");
     tempTimeWirter->start();
     MDPointLoader dataReader;
     vector<MDPoint> *data = new vector<MDPoint>(dataReader.getData(pathToFile));
     vector<MDPoint> &dataR = *data;
+    timer.stop();
+    statFileNaive.readingDatasetTime = timer.getTime();
+    statFileOptim.readingDatasetTime = timer.getTime();
     tempTimeWirter->stop();
     tempTimeWirter->writeTime();
     delete tempTimeWirter;
@@ -101,41 +173,44 @@ int main()
 
     //Start procedure
     TimeWriter timeWriter(pathToStoreTimeOfExecution, Identyficator("dbscrn", to_string(dataR.size())));
-    int k = 2;
-    STAT statisticForNaiveVersion("Data/STAT_naive.csv");
-    STAT statisticForOptimVersion("Data/STAT_optim.csv");
-
-    ostringstream *oss = new ostringstream();
-    *oss << "k= " << k << endl;
-    *oss << "pathTofile = " << pathToFile;
-    string tempString = oss->str();
-    statisticForNaiveVersion.writeLine(tempString);
-    statisticForOptimVersion.writeLine(tempString);
-    delete (oss);
-    timeWriter.start();
-
     vector<MDPoint> dataOptim = *data;
     vector<MDPoint> &dataOptimR = dataOptim;
-    NaiveRNN(dataR, k);
+    NaiveRNN(dataR, k, statFileNaive.sortingDataTime);
+    timer.start();
     enterToBuildClaster(dataR, k);
-    DataWriter dataWriter;
-    string pathToResultFile = "Data/OUT.csv";
-    string pathToResultFileNaiveV = "Data/OUT_naive.csv";
-    string pathToDebugFile = "Data/naiveVersionDebug.csv";
-    dataWriter.writeMDPoints(pathToDebugFile, dataR);
+    timer.stop();
+    statFileNaive.clasteringTime = timer.getTime();
+    totalTimerNaive.stop();
+    statFileNaive.totalRuntime = totalTimerNaive.getTime();
 
-    OptimisedRNN(dataOptimR, k);
-    pathToDebugFile = "Data/optimVersionDebug.csv";
+    DataWriter dataWriter;
+    dataWriter.writeMDPoints(pathToDEBUGFileNaive, dataR);
+    dataWriter.writeClasteringResults(pathToOUTFileNaive, dataR);
+    statFileNaive.gatherDataFromCollection(dataR);
+    statFileNaive.writeSTATFile();
+    //end naive
+
+    totalTimerOptim.start();
+    OptimisedRNN(dataOptimR, k, statFileOptim.sortingDataTime);
 
     //Clasters building
+    timer.start();
     enterToBuildClaster(dataOptimR, k);
+    timer.stop();
+    statFileOptim.clasteringTime = timer.getTime();
     // This it end and time calculation
     timeWriter.stop();
     timeWriter.writeTime();
-    dataWriter.writeMDPoints(pathToDebugFile, dataOptimR);
-    //End Claster building
-    dataWriter.writeClasteringResults(pathToResultFile, dataOptimR);
-    dataWriter.writeClasteringResults(pathToResultFileNaiveV, dataR);
+    totalTimerOptim.stop();
+    statFileOptim.totalRuntime = totalTimerOptim.getTime() + statFileOptim.readingDatasetTime;
 
+    dataWriter.writeMDPoints(pathToDEBUGFileOptim, dataOptimR);
+    //End Claster building
+    dataWriter.writeClasteringResults(pathToOUTFileOptim, dataOptimR);
+    statFileOptim.gatherDataFromCollection(dataOptimR);
+    statFileOptim.writeSTATFile();
+
+    cout << endl
+         << "finised" << endl;
     return 0;
 }

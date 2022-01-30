@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+cp OUT_dbscrn_naive_.csv results/OUT_dbscrn_naive_$1.csv
+cp STAT_dbscrn_naive_.csv results/STAT_dbscrn_naive_$1.csv
+cp DEBUG_dbscrn_naive_.csv results/DEBUG_dbscrn_naive_$1.csv
+
+cp OUT_dbscrn_optim_.csv results/OUT_dbscrn_optim_$1.csv
+cp STAT_dbscrn_optim_.csv results/STAT_dbscrn_optim_$1.csv
+cp DEBUG_dbscrn_optim_.csv results/DEBUG_dbscrn_optim_$1.csv

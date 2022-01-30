@@ -22,7 +22,7 @@ vector<MDPoint> MDPointLoader::getData(string pathToData)
     while (getline(MyReadFile, rowTextLine))
     {
         // Output the text from the file
-        cout << rowTextLine << endl;
+        // cout << rowTextLine << endl;
         MDPoint dataEntity(rowTextLine);
         dataEntityArray.push_back(dataEntity);
     };

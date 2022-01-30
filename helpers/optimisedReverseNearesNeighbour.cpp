@@ -11,7 +11,7 @@ public:
     MDPointWithDist(MDPoint point, long index, double dist) : MDPointWithIndex(point, index), distToReferencePoint(dist){};
 };
 
-void OptimisedRNN(vector<MDPoint> &data, int k)
+void OptimisedRNN(vector<MDPoint> &data, int k, double &executionTime)
 {
     string pathToStoreTimeOfExecution = "Data/time.csv";
     TimeWriter timeWriter(pathToStoreTimeOfExecution, "calcNNk , optimVersion");
@@ -23,11 +23,12 @@ void OptimisedRNN(vector<MDPoint> &data, int k)
          { return pointA.lengthOfVector < pointB.lengthOfVector; });
     timeWriterSorter.stop();
     timeWriterSorter.writeTime();
+    executionTime = timeWriterSorter.getTime();
     timeWriter.start();
     size_t index = 0;
     for (auto &point : data)
     {
-        point.optimCalcNNk(k, data, index);
+        point.optimCalcNNk(k, data, index, executionTime);
         index++;
     }
 

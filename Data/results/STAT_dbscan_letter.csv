@@ -1,0 +1,15 @@
+Algorithm = DBSCAN
+params = numberOfMinNeighbour = 5 eps = 0.00025
+name of input file = Data/letter.csv
+number of points = 20000
+number of dimensions = 16
+reading data set time [second]/[minuts] = 0.68588/0.0114313
+sorting data time [second]/[minuts] = 0/0
+finding neighbours and reverse neighbours time [second]/[minuts] = 793.017/13.217
+discover clasters time [second]/[minuts]= 5.71443/0.0952406
+total run time [second]/[minuts]= 793.724/13.2287
+number of clasters = 16
+number of core points = 156
+number of border points = 0
+number of noise points = 19844
+avarage number of distance calculations = 20000

@@ -16,6 +16,8 @@ class TimeWriter {
     void start();
     void stop();
     void writeTime();
+    double getTime();
     TimeWriter(string path, string identifire);
+    TimeWriter();
 };
 #endif

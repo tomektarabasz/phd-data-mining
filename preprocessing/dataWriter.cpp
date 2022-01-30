@@ -38,9 +38,13 @@ void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
         }
         resultFile << "len,";
         resultFile << "clasteId,";
+        resultFile << "pointType,";
+        resultFile << "timeToCalcNeighbours,";
+        resultFile << "# distance calc,";
         resultFile << "len(rnnk),";
         resultFile << "kNN,";
         resultFile << "reverskNN,";
+        resultFile << "NDF";
         resultFile << "\n";
         for (auto point : data)
         {
@@ -51,6 +55,9 @@ void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
             }
             resultFile << point.lengthOfVector << ",";
             resultFile << point.clasterId << ",";
+            resultFile << point.pointType << ",";
+            resultFile << point.timeToFindNeighbour << ",";
+            resultFile << point.numbersOfDistanceCalculatons << ",";
             resultFile << point.rnnk << ",";
             resultFile << "[,";
             for (auto nn : point.nnk)
@@ -63,6 +70,13 @@ void DataWriter::writeMDPoints(string pathToFile, vector<MDPoint> &data)
             for (auto rn : point.reverseNeighbourIndexes)
             {
                 resultFile << rn << ";";
+            }
+            resultFile << "],";
+
+            resultFile << "[,";
+            for (auto index : point.neighbourIndexes)
+            {
+                resultFile << data[index].id << ";";
             }
             resultFile << "],";
 
@@ -88,9 +102,9 @@ void DataWriter::writeClasteringResults(string pathToFile, vector<MDPoint> &data
             resultFile << "x" << iter << ",";
             iter++;
         }
-        resultFile << "claserId,";
+        resultFile << "clasterId,";
         resultFile << "pointType,";
-        resultFile << "dist,";
+        resultFile << "#dist,";
         resultFile << endl;
 
         for (auto point : data)
@@ -103,13 +117,7 @@ void DataWriter::writeClasteringResults(string pathToFile, vector<MDPoint> &data
 
             resultFile << point.clasterId << ",";
             resultFile << point.pointType << ",";
-
-            resultFile << "|,";
-            for (auto dist : point.distancesToOtherPoints)
-            {
-                resultFile << dist.id << "=" << dist.dist << ",";
-            }
-            resultFile << "|,";
+            resultFile << point.numbersOfDistanceCalculatons;
             resultFile << "\n";
         }
         resultFile.close();
@@ -126,6 +134,64 @@ void STAT::writeLine(string line)
     if (resultFile.is_open())
     {
         resultFile << line << endl;
+    }
+    else
+        cout << "Unable to open file";
+}
+void STAT::gatherDataFromCollection(vector<MDPoint> &data)
+{
+    this->numberOfPoints = data.size();
+    this->numberofDismensions = data[0].attributes.size();
+    int numberOfClusters=0;
+    int numberOfCorePoints=0;
+    int numberOfBorderPoints=0;
+    int numberOfNoisePoint=0;
+    int sumOfDistanceCalculations;
+    long currentMax = 0;
+    for(auto point: data){
+        if(point.pointType==1){
+            numberOfCorePoints++;
+        }
+        if(point.pointType==0){
+            numberOfBorderPoints++;
+        }
+        if(point.pointType==-1){
+            numberOfNoisePoint++;
+        }
+        if(point.clasterId>currentMax){
+            numberOfClusters=point.clasterId;
+            currentMax = point.clasterId;
+        }
+        sumOfDistanceCalculations+=point.numbersOfDistanceCalculatons;
+    }
+    this->numberOfClusters=numberOfClusters;
+    this->numberOfCorePoints=numberOfCorePoints;
+    this->numberOfBorderPoints=numberOfBorderPoints;
+    this->numberOfNoisePoint=numberOfNoisePoint;
+    this->avarOfDistanceCalculations=sumOfDistanceCalculations/this->numberOfPoints;
+
+};
+void STAT::writeSTATFile()
+{
+    ofstream resultFile(this->pathToFile);
+
+    if (resultFile.is_open())
+    {
+        resultFile << "Algorithm = " << this->algorithm << endl;
+        resultFile << "params = " << this->params<<endl;
+        resultFile << "name of input file = " << this->nameOfInputFile << endl;
+        resultFile << "number of points = " << this->numberOfPoints << endl;
+        resultFile << "number of dimensions = " << this->numberofDismensions << endl;
+        resultFile << "reading data set time [second]/[minuts] = " << this->readingDatasetTime / 1000 << "/" << this->readingDatasetTime / 60 / 1000 << endl;
+        resultFile << "sorting data time [second]/[minuts] = " << this->sortingDataTime / 1000 << "/" << this->sortingDataTime / 60 / 1000 << endl;
+        resultFile << "finding neighbours and reverse neighbours time [second]/[minuts] = " << this->findingNeighboursAndReverNeighbourTime / 1000 << "/" << this->findingNeighboursAndReverNeighbourTime / 60 / 1000 << endl;
+        resultFile << "discover clasters time [second]/[minuts]= " << this->clasteringTime / 1000 << "/" << this->clasteringTime / 1000 / 60 << endl;
+        resultFile << "total run time [second]/[minuts]= " << this->totalRuntime / 1000 << "/" << this->totalRuntime / 1000 / 60 << endl;
+        resultFile << "number of clasters = " << this->numberOfClusters << endl;
+        resultFile << "number of core points = " << this->numberOfCorePoints << endl;
+        resultFile << "number of border points = " << this->numberOfBorderPoints << endl;
+        resultFile << "number of noise points = " << this->numberOfNoisePoint << endl;
+        resultFile << "avarage number of distance calculations = " << this->avarOfDistanceCalculations << endl;
     }
     else
         cout << "Unable to open file";
