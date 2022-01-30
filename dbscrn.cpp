@@ -175,7 +175,10 @@ int main(int argc, char **argv)
     TimeWriter timeWriter(pathToStoreTimeOfExecution, Identyficator("dbscrn", to_string(dataR.size())));
     vector<MDPoint> dataOptim = *data;
     vector<MDPoint> &dataOptimR = dataOptim;
+    timer.start();
     NaiveRNN(dataR, k, statFileNaive.sortingDataTime);
+    timer.stop();
+    statFileNaive.findingNeighboursAndReverNeighbourTime = timer.getTime();
     timer.start();
     enterToBuildClaster(dataR, k);
     timer.stop();
@@ -191,8 +194,10 @@ int main(int argc, char **argv)
     //end naive
 
     totalTimerOptim.start();
+    timer.start();
     OptimisedRNN(dataOptimR, k, statFileOptim.sortingDataTime);
-
+    timer.stop();
+    statFileOptim.findingNeighboursAndReverNeighbourTime = timer.getTime();
     //Clasters building
     timer.start();
     enterToBuildClaster(dataOptimR, k);

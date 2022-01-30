@@ -1139,3 +1139,70 @@ dbsacn
 30-01-2022 02:15:27,0.141532,calcNNk , Sort Data based on length
 30-01-2022 02:15:27,4.76018,calcNNk , optimVersion
 30-01-2022 02:15:27,1.64351e+12,dbscrn,12
+30-01-2022 02:18:42,0.346946,dataTimeLoading
+30-01-2022 02:18:42,3.15187,calcNNk , pure version
+30-01-2022 02:18:42,0.15273,calcNNk , Sort Data based on length
+30-01-2022 02:18:42,4.71431,calcNNk , optimVersion
+30-01-2022 02:18:42,1.64351e+12,dbscrn,12
+30-01-2022 02:18:58,0.349534,dataTimeLoading
+30-01-2022 02:18:58,1.15272,calcNNk , pure version
+30-01-2022 02:18:58,0.062283,calcNNk , Sort Data based on length
+30-01-2022 02:18:58,1.62922,calcNNk , optimVersion
+30-01-2022 02:18:58,1.64351e+12,dbscrn,12
+30-01-2022 02:19:01,0.344897,dataTimeLoading
+30-01-2022 02:19:01,1.28969,calcNNk , pure version
+30-01-2022 02:19:01,0.04792,calcNNk , Sort Data based on length
+30-01-2022 02:19:01,1.57306,calcNNk , optimVersion
+30-01-2022 02:19:01,1.64351e+12,dbscrn,12
+30-01-2022 02:20:06,0.340512,dataTimeLoading
+30-01-2022 02:20:06,1.07332,calcNNk , pure version
+30-01-2022 02:20:06,0.048377,calcNNk , Sort Data based on length
+30-01-2022 02:20:06,0.992968,calcNNk , optimVersion
+30-01-2022 02:20:06,1.64351e+12,dbscrn,12
+30-01-2022 02:21:02,0.35398,dataTimeLoading
+30-01-2022 02:21:02,3.87356,calcNNk , pure version
+30-01-2022 02:21:02,0.14166,calcNNk , Sort Data based on length
+30-01-2022 02:21:02,7.38431,calcNNk , optimVersion
+30-01-2022 02:21:02,1.64351e+12,dbscrn,12
+30-01-2022 02:39:53,0.35454,dataTimeLoading
+30-01-2022 02:39:53,1.61689,calcNNk , pure version
+30-01-2022 02:39:53,0.047238,calcNNk , Sort Data based on length
+30-01-2022 02:39:53,1.5808,calcNNk , optimVersion
+30-01-2022 02:39:53,1.64351e+12,dbscrn,12
+30-01-2022 02:41:19,0.351947,dataTimeLoading
+30-01-2022 02:41:19,1.23926,calcNNk , pure version
+30-01-2022 02:41:19,0.04745,calcNNk , Sort Data based on length
+30-01-2022 02:41:19,1.57702,calcNNk , optimVersion
+30-01-2022 02:41:19,1.64351e+12,dbscrn,12
+30-01-2022 02:41:22,0.350397,dataTimeLoading
+30-01-2022 02:41:22,1.88914,calcNNk , pure version
+30-01-2022 02:41:22,0.049428,calcNNk , Sort Data based on length
+30-01-2022 02:41:22,1.58336,calcNNk , optimVersion
+30-01-2022 02:41:22,1.64351e+12,dbscrn,12
+30-01-2022 02:42:25,0.359013,dataTimeLoading
+30-01-2022 02:42:25,1.39164,calcNNk , pure version
+30-01-2022 02:42:25,0.047285,calcNNk , Sort Data based on length
+30-01-2022 02:42:25,1.58062,calcNNk , optimVersion
+30-01-2022 02:42:25,1.64351e+12,dbscrn,12
+30-01-2022 02:43:07,50.7557,dataTimeLoading
+30-01-2022 02:43:15,267.109,dataTimeLoading
+30-01-2022 02:52:12,545177,calcNNk , pure version
+30-01-2022 02:52:12,72.5629,calcNNk , Sort Data based on length
+30-01-2022 02:54:03,110524,calcNNk , optimVersion
+30-01-2022 02:54:03,1.64351e+12,dbscrn,10000
+30-01-2022 03:10:02,16.1272,dataTimeLoading
+30-01-2022 03:11:01,59260.2,calcNNk , pure version
+30-01-2022 03:11:02,19.3724,calcNNk , Sort Data based on length
+30-01-2022 03:11:20,18325,calcNNk , optimVersion
+30-01-2022 03:11:20,1.64351e+12,dbscrn,3031
+30-01-2022 03:11:34,357.14,dataTimeLoading
+30-01-2022 03:12:01,27046.8,calcNNk , pure version
+30-01-2022 03:12:02,5.9753,calcNNk , Sort Data based on length
+30-01-2022 03:12:28,25861.4,calcNNk , optimVersion
+30-01-2022 03:12:28,1.64351e+12,dbscrn,1024
+30-01-2022 03:29:56,2.80053e+06,calcNNk , pure version
+30-01-2022 03:29:57,138.26,calcNNk , Sort Data based on length
+30-01-2022 12:55:44,367.314,dataTimeLoading
+30-01-2022 12:56:12,28171.2,calcNNk , pure version
+30-01-2022 12:56:13,5.98735,calcNNk , Sort Data based on length
+30-01-2022 12:56:39,26394.4,calcNNk , optimVersion

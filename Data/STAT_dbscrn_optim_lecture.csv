@@ -3,11 +3,11 @@ params = k = 2
 name of input file = Data/lecture.csv
 number of points = 12
 number of dimensions = 2
-reading data set time [second]/[minuts] = 0.000351825/5.86375e-06
-sorting data time [second]/[minuts] = 0.00135622/2.26037e-05
+reading data set time [second]/[minuts] = 0.000359895/5.99825e-06
+sorting data time [second]/[minuts] = 0.000465413/7.75688e-06
 finding neighbours and reverse neighbours time [second]/[minuts] = 2.12203e-317/3.53672e-319
-discover clasters time [second]/[minuts]= 2.172e-05/3.62e-07
-total run time [second]/[minuts]= 0.00550148/9.16913e-05
+discover clasters time [second]/[minuts]= 7.304e-06/1.21733e-07
+total run time [second]/[minuts]= 0.00207493/3.45821e-05
 number of clasters = 2
 number of core points = 5
 number of border points = 6

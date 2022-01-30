@@ -13,25 +13,20 @@ public:
 
 void OptimisedRNN(vector<MDPoint> &data, int k, double &executionTime)
 {
-    string pathToStoreTimeOfExecution = "Data/time.csv";
-    TimeWriter timeWriter(pathToStoreTimeOfExecution, "calcNNk , optimVersion");
-    timeWriter.start();
+    TimeWriter timer;
 
-    TimeWriter timeWriterSorter(pathToStoreTimeOfExecution, "calcNNk , Sort Data based on length");
-    timeWriterSorter.start();
+    timer.start();
     sort(data.begin(), data.end(), [](MDPoint &pointA, MDPoint &pointB)
          { return pointA.lengthOfVector < pointB.lengthOfVector; });
-    timeWriterSorter.stop();
-    timeWriterSorter.writeTime();
-    executionTime = timeWriterSorter.getTime();
-    timeWriter.start();
+    timer.stop();
+    executionTime = timer.getTime();
     size_t index = 0;
     for (auto &point : data)
     {
+        timer.start();
         point.optimCalcNNk(k, data, index, executionTime);
+        timer.stop();
+        point.timeToFindNeighbour = timer.getTime();
         index++;
     }
-
-    timeWriter.stop();
-    timeWriter.writeTime();
 }
