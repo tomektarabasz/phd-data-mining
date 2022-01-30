@@ -1,0 +1,15 @@
+Algorithm = DBSCRN
+params = k = 10
+name of input file = Data/cluto-t7-10k.csv
+number of points = 10000
+number of dimensions = 2
+reading data set time [second]/[minuts] = 0.0559232/0.000932053
+sorting data time [second]/[minuts] = 50.0866/0.834776
+finding neighbours and reverse neighbours time [second]/[minuts] = 110.129/1.83549
+discover clasters time [second]/[minuts]= 0.0108765/0.000181275
+total run time [second]/[minuts]= 110.196/1.8366
+number of clasters = 174
+number of core points = 4441
+number of border points = 5415
+number of noise points = 144
+avarage number of distance calculations = 1798

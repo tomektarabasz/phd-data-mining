@@ -44,22 +44,10 @@ void buildClaster(vector<unsigned long> potentialSeeds, vector<MDPoint> &allData
                 p.pointType = 1;
                 vector<unsigned long> newPotentialSeeds = p.reverseNeighbourIndexes;
                 filterNeighbourFromAlreadyCalculatedPoints(newPotentialSeeds, allData);
-                // point.assingToTheSameClusterId(allData);
                 buildClaster(newPotentialSeeds, allData, k, clasterId);
             };
         }
     }
-    // MDPoint &point = allData[potentialSeeds.back()];
-
-    // if (point.rnnk >= k)
-    // {
-    //     vector<unsigned long> newPotentialSeeds = point.reverseNeighbourIndexes;
-    //     filterNeighbourFromAlreadyCalculatedPoints(newPotentialSeeds, allData);
-    //     // point.assingToTheSameClusterId(allData);
-    //     buildClaster(newPotentialSeeds, allData, k, clasterId);
-    // };
-    // potentialSeeds.pop_back();
-    // buildClaster(potentialSeeds, allData, k, clasterId);
 }
 
 void enterToBuildClaster(vector<MDPoint> &data, int k)
@@ -85,10 +73,13 @@ int main(int argc, char **argv)
 {
     string arg1 = argv[1];
     string arg2 = argv[2];
+    string arg3 = argv[3];
     cout << arg1 << endl;
     cout << arg2 << endl;
+    cout << arg3 << endl;
     int fileNumber = stoi(arg1);
     int k = stoi(arg2);
+    bool isOptimVersion = stoi(arg3);
 
     string *paths = new string[5];
     paths[0] = "Data/lecture.csv";
@@ -129,7 +120,7 @@ int main(int argc, char **argv)
     string pathToDEBUGFileNaive = oss->str();
     oss->str("");
 
-    *oss << "k = " << k;
+    *oss << "k = " << k << "isOptimVersion = " << isOptimVersion;
     statFileNaive.params = oss->str();
     statFileOptim.params = oss->str();
 
@@ -175,45 +166,49 @@ int main(int argc, char **argv)
     TimeWriter timeWriter(pathToStoreTimeOfExecution, Identyficator("dbscrn", to_string(dataR.size())));
     vector<MDPoint> dataOptim = *data;
     vector<MDPoint> &dataOptimR = dataOptim;
-    timer.start();
-    NaiveRNN(dataR, k, statFileNaive.sortingDataTime);
-    timer.stop();
-    statFileNaive.findingNeighboursAndReverNeighbourTime = timer.getTime();
-    timer.start();
-    enterToBuildClaster(dataR, k);
-    timer.stop();
-    statFileNaive.clasteringTime = timer.getTime();
-    totalTimerNaive.stop();
-    statFileNaive.totalRuntime = totalTimerNaive.getTime();
-
     DataWriter dataWriter;
-    dataWriter.writeMDPoints(pathToDEBUGFileNaive, dataR);
-    dataWriter.writeClasteringResults(pathToOUTFileNaive, dataR);
-    statFileNaive.gatherDataFromCollection(dataR);
-    statFileNaive.writeSTATFile();
-    //end naive
-
-    totalTimerOptim.start();
     timer.start();
-    OptimisedRNN(dataOptimR, k, statFileOptim.sortingDataTime);
-    timer.stop();
-    statFileOptim.findingNeighboursAndReverNeighbourTime = timer.getTime();
-    //Clasters building
-    timer.start();
-    enterToBuildClaster(dataOptimR, k);
-    timer.stop();
-    statFileOptim.clasteringTime = timer.getTime();
-    // This it end and time calculation
-    timeWriter.stop();
-    timeWriter.writeTime();
-    totalTimerOptim.stop();
-    statFileOptim.totalRuntime = totalTimerOptim.getTime() + statFileOptim.readingDatasetTime;
+    if (!isOptimVersion)
+    {
+        NaiveRNN(dataR, k, statFileNaive.sortingDataTime);
+        timer.stop();
+        statFileNaive.findingNeighboursAndReverNeighbourTime = timer.getTime();
+        timer.start();
+        enterToBuildClaster(dataR, k);
+        timer.stop();
+        statFileNaive.clasteringTime = timer.getTime();
+        totalTimerNaive.stop();
+        statFileNaive.totalRuntime = totalTimerNaive.getTime();
+        dataWriter.writeMDPoints(pathToDEBUGFileNaive, dataR);
+        dataWriter.writeClasteringResults(pathToOUTFileNaive, dataR);
+        statFileNaive.gatherDataFromCollection(dataR);
+        statFileNaive.writeSTATFile();
+        //end naive
+    }
+    else
+    {
+        totalTimerOptim.start();
+        timer.start();
+        OptimisedRNN(dataOptimR, k, statFileOptim.sortingDataTime);
+        timer.stop();
+        statFileOptim.findingNeighboursAndReverNeighbourTime = timer.getTime();
+        //Clasters building
+        timer.start();
+        enterToBuildClaster(dataOptimR, k);
+        timer.stop();
+        statFileOptim.clasteringTime = timer.getTime();
+        // This it end and time calculation
+        timeWriter.stop();
+        timeWriter.writeTime();
+        totalTimerOptim.stop();
+        statFileOptim.totalRuntime = totalTimerOptim.getTime() + statFileOptim.readingDatasetTime;
 
-    dataWriter.writeMDPoints(pathToDEBUGFileOptim, dataOptimR);
-    //End Claster building
-    dataWriter.writeClasteringResults(pathToOUTFileOptim, dataOptimR);
-    statFileOptim.gatherDataFromCollection(dataOptimR);
-    statFileOptim.writeSTATFile();
+        dataWriter.writeMDPoints(pathToDEBUGFileOptim, dataOptimR);
+        //End Claster building
+        dataWriter.writeClasteringResults(pathToOUTFileOptim, dataOptimR);
+        statFileOptim.gatherDataFromCollection(dataOptimR);
+        statFileOptim.writeSTATFile();
+    }
 
     cout << endl
          << "finised" << endl;

@@ -1,0 +1,15 @@
+Algorithm = DBSCRN
+params = k = 2
+name of input file = Data/lecture.csv
+number of points = 12
+number of dimensions = 2
+reading data set time [second]/[minuts] = 0.000359895/5.99825e-06
+sorting data time [second]/[minuts] = 0.000303263/5.05438e-06
+finding neighbours and reverse neighbours time [second]/[minuts] = -1.29091e+246/-2.15151e+244
+discover clasters time [second]/[minuts]= 5.479e-06/9.13167e-08
+total run time [second]/[minuts]= 0.00203831/3.39719e-05
+number of clasters = 3
+number of core points = 5
+number of border points = 6
+number of noise points = 1
+avarage number of distance calculations = 26
