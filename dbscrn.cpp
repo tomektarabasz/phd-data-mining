@@ -152,7 +152,9 @@ int main(int argc, char **argv)
     TimeWriter *tempTimeWirter = new TimeWriter(pathToStoreTimeOfExecution, "dataTimeLoading");
     tempTimeWirter->start();
     MDPointLoader dataReader;
+    cout<< "start read data";
     vector<MDPoint> *data = new vector<MDPoint>(dataReader.getData(pathToFile));
+    cout<< "stop read data";
     vector<MDPoint> &dataR = *data;
     timer.stop();
     statFileNaive.readingDatasetTime = timer.getTime();
@@ -167,15 +169,20 @@ int main(int argc, char **argv)
     vector<MDPoint> dataOptim = *data;
     vector<MDPoint> &dataOptimR = dataOptim;
     DataWriter dataWriter;
-    timer.start();
+    
     if (!isOptimVersion)
     {
+        cout<< "start naive neighbor search";
+        timer.start();
         NaiveRNN(dataR, k, statFileNaive.sortingDataTime);
         timer.stop();
+        cout<< "stop naive neighbor search";
         statFileNaive.findingNeighboursAndReverNeighbourTime = timer.getTime();
         timer.start();
+        cout<< "start naive claster build";
         enterToBuildClaster(dataR, k);
         timer.stop();
+        cout<< "stop naive claster build";
         statFileNaive.clasteringTime = timer.getTime();
         totalTimerNaive.stop();
         statFileNaive.totalRuntime = totalTimerNaive.getTime();
@@ -189,17 +196,20 @@ int main(int argc, char **argv)
     {
         totalTimerOptim.start();
         timer.start();
+        cout<< "start neighbours search";
         OptimisedRNN(dataOptimR, k, statFileOptim.sortingDataTime);
+        cout<< "end neighbours search";
         timer.stop();
         statFileOptim.findingNeighboursAndReverNeighbourTime = timer.getTime();
         //Clasters building
         timer.start();
+        cout<< "start discaver clasters";
         enterToBuildClaster(dataOptimR, k);
         timer.stop();
+        cout<< "end discaver clasters";
         statFileOptim.clasteringTime = timer.getTime();
         // This it end and time calculation
         timeWriter.stop();
-        timeWriter.writeTime();
         totalTimerOptim.stop();
         statFileOptim.totalRuntime = totalTimerOptim.getTime() + statFileOptim.readingDatasetTime;
 

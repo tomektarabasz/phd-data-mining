@@ -167,7 +167,10 @@ void MDPoint::calcNNk(int k, vector<MDPoint> &data, unsigned long index, double 
 }
 
 template <typename T>
-vector<T> sliceVector(vector<T> vec, unsigned long k) { return vector<T>(vec.begin(), vec.begin() + k); };
+vector<T> sliceVector(vector<T> &vec, int k)
+{
+    return vector<T>(vec.begin(), vec.begin() + k);
+};
 
 vector<MDPointWithIndex> kSouranders(int k, vector<MDPoint> &data, unsigned long index, IndexAndLength &alreadyChecked)
 {
@@ -200,7 +203,7 @@ vector<MDPointWithIndex> kSouranders(int k, vector<MDPoint> &data, unsigned long
          {
              double deltaA = abs(referencePoint.lengthOfVector - a.point.lengthOfVector);
              double deltaB = abs(referencePoint.lengthOfVector - b.point.lengthOfVector);
-             return deltaA <= deltaB;
+             return deltaA < deltaB;
          });
     candidates = sliceVector<MDPointWithIndex>(candidates, k);
 

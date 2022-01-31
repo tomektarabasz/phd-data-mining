@@ -24,7 +24,16 @@ void OptimisedRNN(vector<MDPoint> &data, int k, double &executionTime)
     for (auto &point : data)
     {
         timer.start();
-        point.optimCalcNNk(k, data, index, executionTime);
+        try
+        {
+            point.optimCalcNNk(k, data, index, executionTime);
+        }
+        catch (int id)
+        {
+            cout << id;
+            cout << "exception id = " << point.id;
+        }
+
         timer.stop();
         point.timeToFindNeighbour = timer.getTime();
         index++;

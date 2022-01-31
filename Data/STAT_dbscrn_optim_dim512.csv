@@ -1,13 +1,13 @@
 Algorithm = DBSCRN
-params = k = 4
+params = k = 4isOptimVersion = 1
 name of input file = Data/dim512.csv
 number of points = 1024
 number of dimensions = 512
-reading data set time [second]/[minuts] = 0.344542/0.00574237
-sorting data time [second]/[minuts] = 15.0402/0.25067
-finding neighbours and reverse neighbours time [second]/[minuts] = 26.9939/0.449898
-discover clasters time [second]/[minuts]= 0.000540058/9.00097e-06
-total run time [second]/[minuts]= 27.339/0.45565
+reading data set time [second]/[minuts] = 0.348685/0.00581142
+sorting data time [second]/[minuts] = 14.8135/0.246891
+finding neighbours and reverse neighbours time [second]/[minuts] = 26.635/0.443916
+discover clasters time [second]/[minuts]= 0.000511874/8.53123e-06
+total run time [second]/[minuts]= 26.9842/0.449736
 number of clasters = 16
 number of core points = 190
 number of border points = 833

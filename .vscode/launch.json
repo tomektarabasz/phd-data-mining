@@ -5,13 +5,14 @@
     "version": "0.2.0",
     "configurations": [
 
+
     
         {
             "name": "g++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["1","4"],
+            "args": ["4","17", "1"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
