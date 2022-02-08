@@ -1,4 +1,4 @@
-originPath = "Data/OUT_dbscan_.csv"
+originPath = "Data/OUT_dbscan_lecture.csv"
 newPath = "Data/OUT_dbscan_-cuted.csv"
 
 
@@ -32,8 +32,8 @@ colormap = matplotlib.cm.get_cmap("autumn", clasters.shape[0])
 plot = df.plot(x="x1",y="x2",kind="scatter", c="pointType", cmap=colormap)
 # plot = df.plot(x="x1",y="x2",kind="scatter")
 plt.gca().set_aspect('equal', adjustable='box')
-# for i, txt in enumerate(df[['id','pointType']].values):
-#     plt.annotate("{0}_{1}".format(txt[0],txt[1]),(df["x1"][i],df["x2"][i]))
+for i, txt in enumerate(df[['id','pointType']].values):
+    plt.annotate("{0}_{1}".format(txt[0],txt[1]),(df["x1"][i],df["x2"][i]))
 
 print(clasters)
 plt.show()

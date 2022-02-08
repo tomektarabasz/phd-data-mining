@@ -1,15 +1,15 @@
 Algorithm = DBSCAN
-params = numberOfMinNeighbour = 10 eps = 0
+params = numberOfMinNeighbour = 6 eps = 0.00025 eps-tanimoto-similarity = 0.99975
 name of input file = Data/cluto-t7-10k.csv
 number of points = 10000
 number of dimensions = 2
-reading data set time [second]/[minuts] = 0.0538341/0.000897235
+reading data set time [second]/[minuts] = 0.053713/0.000895217
 sorting data time [second]/[minuts] = 0/0
-finding neighbours and reverse neighbours time [second]/[minuts] = 166.81/2.78017
-discover clasters time [second]/[minuts]= 0/0
-total run time [second]/[minuts]= 166.872/2.78121
-number of clasters = 0
-number of core points = 0
-number of border points = 0
-number of noise points = 10000
+finding neighbours and reverse neighbours time [second]/[minuts] = 186.291/3.10484
+discover clasters time [second]/[minuts]= 142.414/2.37356
+total run time [second]/[minuts]= 186.382/3.10637
+number of clasters = 77
+number of core points = 7065
+number of border points = 793
+number of noise points = 2142
 avarage number of distance calculations = 10000

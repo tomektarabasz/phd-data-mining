@@ -1,13 +1,13 @@
 Algorithm = DBSCAN
-params = numberOfMinNeighbour = 3 eps = 0.0005
+params = numberOfMinNeighbour = 5 eps = 0.0005 eps-tanimoto-similarity = 0.9995
 name of input file = Data/complex9.csv
 number of points = 3031
 number of dimensions = 2
-reading data set time [second]/[minuts] = 0.0166266/0.000277111
+reading data set time [second]/[minuts] = 0.0155705/0.000259508
 sorting data time [second]/[minuts] = 0/0
-finding neighbours and reverse neighbours time [second]/[minuts] = 16.0309/0.267182
-discover clasters time [second]/[minuts]= 12.3907/0.206512
-total run time [second]/[minuts]= 16.0529/0.267548
+finding neighbours and reverse neighbours time [second]/[minuts] = 16.6352/0.277253
+discover clasters time [second]/[minuts]= 12.8608/0.214347
+total run time [second]/[minuts]= 16.6587/0.277645
 number of clasters = 49
 number of core points = 2160
 number of border points = 306

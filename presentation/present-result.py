@@ -1,4 +1,4 @@
-originPath = "Data/OUT_dbscrn_naive_lecture.csv"
+originPath = "Data/OUT_dbscan_lecture.csv"
 newPath = "Data/OUT_dbscrn_lecture.csv"
 
 

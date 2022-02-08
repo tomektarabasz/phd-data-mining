@@ -1,0 +1,15 @@
+Algorithm = DBSCRN
+params = k = 9isOptimVersion = 1
+name of input file = Data/complex9.csv
+number of points = 3031
+number of dimensions = 2
+reading data set time [second]/[minuts] = 0.0152877/0.000254795
+sorting data time [second]/[minuts] = 8.59238/0.143206
+finding neighbours and reverse neighbours time [second]/[minuts] = 15.805/0.263416
+discover clasters time [second]/[minuts]= 0.00406915/6.78191e-05
+total run time [second]/[minuts]= 15.8243/0.263739
+number of clasters = 40
+number of core points = 1753
+number of border points = 1275
+number of noise points = 3
+avarage number of distance calculations = 981

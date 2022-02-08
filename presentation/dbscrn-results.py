@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 
-paths = {"dbscrn-optim":r'./Data/dbscrnResults.csv'}
+paths = {"dbscrn-optim":r'./Data/dbscrn.csv'}
 
 path = paths["dbscrn-optim"]
 

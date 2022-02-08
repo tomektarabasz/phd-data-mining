@@ -12,9 +12,9 @@
 
 using namespace std;
 
-bool isEnughtRNNToBeCorePoint(long rnn, long limit)
+bool isEnoughtRNNToBeCorePoint(long rnn, long limit)
 {
-    return rnn > limit;
+    return rnn >= limit;
 };
 
 void filterNeighbourFromAlreadyCalculatedPoints(vector<unsigned long> &seed, vector<MDPoint> &allData)
@@ -39,7 +39,7 @@ void buildClaster(vector<unsigned long> potentialSeeds, vector<MDPoint> &allData
             p.pointType = 0;
             p.clasterId = clasterId;
 
-            if (isEnughtRNNToBeCorePoint(p.rnnk, k))
+            if (isEnoughtRNNToBeCorePoint(p.rnnk, k))
             {
                 p.pointType = 1;
                 vector<unsigned long> newPotentialSeeds = p.reverseNeighbourIndexes;
@@ -58,7 +58,7 @@ void enterToBuildClaster(vector<MDPoint> &data, int k)
     {
         if (currentPoint.clasterId == -1)
         {
-            if (isEnughtRNNToBeCorePoint(currentPoint.rnnk, k))
+            if (isEnoughtRNNToBeCorePoint(currentPoint.rnnk, k))
             {
                 currentPoint.clasterId = currentClasterId;
                 currentPoint.pointType = 1; //must be seed because have more rnnk;

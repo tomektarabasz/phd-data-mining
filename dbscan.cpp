@@ -15,7 +15,7 @@ using namespace std;
 
 bool isPointNeighborsEnoughToBeCorePoint(int neighbours, int minPoint)
 {
-    return neighbours > minPoint;
+    return neighbours >= minPoint;
 }
 
 void filterNeighbourFromAlreadyCalculatedPoints(vector<unsigned long> &seed, vector<MDPoint> &allData)
@@ -63,13 +63,14 @@ int main(int argc, char **argv)
 {
     string arg1 = argv[1];
     string arg2 = argv[2];
-    string arg3 = argv[3];
+    string arg3 = argv[3]; // this is treated as tanimoto similarity
     cout << arg1 << endl;
     cout << arg2 << endl;
     cout << arg3 << endl;
     int fileNumber = stoi(arg1);
     int numberOfMinNeighbour = stoi(arg2);
-    double eps = stod(arg3);
+    double epsTanimotoSimilarity = stod(arg3);
+    double eps = 1 - epsTanimotoSimilarity;
 
     string pathToStoreTimeOfExecution = "Data/time.csv";
     string *paths = new string[5];
@@ -128,7 +129,7 @@ int main(int argc, char **argv)
 
     // STAT params saving
     ostringstream ossParams;
-    ossParams << "numberOfMinNeighbour = " << numberOfMinNeighbour << " eps = " << eps;
+    ossParams << "numberOfMinNeighbour = " << numberOfMinNeighbour << " eps = " << eps << " eps-tanimoto-similarity = " << epsTanimotoSimilarity;
     statFile.params = ossParams.str();
     // end STAT params saving
 

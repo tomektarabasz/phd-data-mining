@@ -8,7 +8,7 @@ void findNeigbour(MDPoint &point, vector<MDPoint> &collection, double eps)
     for (unsigned long i = 0; i < collection.size(); i++)
     {
         double dist = point.distToPoint(collection[i]);
-        if (dist <= eps && point.id != collection[i].id)
+        if (dist <= eps /* && point.id != collection[i].id */) // I commented && point.id != collection[i].id because point itself is calculated as neighbour
         {
             point.neighbourIndexes.push_back(i);
         }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
 
-cp OUT_dbscan_.csv results/OUT_dbscan_$1.csv
-cp STAT_dbscan_.csv results/STAT_dbscan_$1.csv
-cp DEBUG_dbscan_.csv results/DEBAG_dbscan_$1.csv
+cp OUT_dbscan_$1.csv results2/OUT_dbscan_$1.csv
+cp STAT_dbscan_$1.csv results2/STAT_dbscan_$1.csv
+cp DEBUG_dbscan_$1.csv results2/DEBAG_dbscan_$1.csv
